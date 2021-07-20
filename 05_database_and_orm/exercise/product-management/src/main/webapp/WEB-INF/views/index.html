@@ -37,13 +37,13 @@
     </thead>
     <tbody>
     <tr th:each="row,rowStat : ${products}">
-        <td th:text="${row.getName()}"></td>
-        <td th:text="${row.getPrice()}"></td>
-        <td th:text="${row.getDescribeProduct()}"></td>
-        <td th:text="${row.getProducer()}"></td>
-        <td><a th:href="@{/product/{id}/edit(id=${row.getId()})}">edit</a></td>
-        <td><a th:href="@{/product/{id}/delete(id=${row.getId()})}">delete</a></td>
-        <td><a th:href="@{/product/{id}/view(id=${row.getId()})}">view</a></td>
+        <td th:text="${row.name}"></td>
+        <td th:text="${row.price}"></td>
+        <td th:text="${row.describeProduct}"></td>
+        <td th:text="${row.producer}"></td>
+        <td><a th:href="@{/product/{id}/edit(id=${row.id})}">edit</a></td>
+        <td><a th:href="@{/product/{id}/delete(id=${row.id})}">delete</a></td>
+        <td><a th:href="@{/product/{id}/view(id=${row.id})}">view</a></td>
     </tr>
     </tbody>
 </table>
