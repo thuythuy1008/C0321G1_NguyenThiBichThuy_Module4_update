@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List student</title>
+</head>
+<body>
+<div th:insert="~{common_customer :: headerCustomer}">
+</div>
+
+<h2>List customer</h2>
+<a href="/customer/create">Create new customer</a>
+<p style="color: green" th:text="${msg}"></p>
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th colspan="2">Action</th>
+    </tr>
+    <tr th:each="customerObj,loop : ${customerList}">
+        <td th:text="${loop.index + 1}"></td>
+        <td th:text="${customerObj.id}"></td>
+        <td th:text="${customerObj.name}"></td>
+        <td th:text="${customerObj.email}"></td>
+        <td th:text="${customerObj.address}"></td>
+        <td><a th:href="@{/customer/detail(idCustomer=${customerObj.id})}">Detail customer RP</a></td>
+        <td><a th:href="@{/customer/detail/{idCustomer}(idCustomer=${customerObj.id})}">Detail customer PV</a></td>
+    </tr>
+</table>
+
+<div th:replace="~{common_customer :: footerCustomer}">
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detail customer</title>
+</head>
+<body>
+<div th:replace="~{common_customer :: headerCustomer}">
+</div>
+<p>Id: <span th:text="${customerObj.id}"></span></p>
+<p>Name: <span th:text="${customerObj.name}"></span></p>
+<p>Email: <span th:text="${customerObj.email}"></span></p>
+<p>Address: <span th:text="${customerObj.address}"></span></p>
+<div th:replace="~{common_customer :: footerCustomer}">
+</div>
+</body>
+</html>
