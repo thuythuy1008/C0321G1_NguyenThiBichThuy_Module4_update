@@ -13,7 +13,8 @@ public class Blog {
     private String blogName;
     private String blogSummary;
     private String blogContent;
-    @Column(columnDefinition = "DATE")
+
+    @Column(name="start_time", columnDefinition = "DATE")
     private String startTime;
 
     @ManyToOne(targetEntity = Category.class)
