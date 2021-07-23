@@ -13,7 +13,8 @@ public class Blog {
     private String blogName;
     private String blogSummary;
     private String blogContent;
-    private Date startTime;
+    @Column(columnDefinition = "DATE")
+    private String startTime;
 
     @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
@@ -22,7 +23,7 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(Long id, String blogName, String blogSummary, String blogContent, Date startTime, Category category) {
+    public Blog(Long id, String blogName, String blogSummary, String blogContent, String startTime, Category category) {
         this.id = id;
         this.blogName = blogName;
         this.blogSummary = blogSummary;
@@ -63,11 +64,11 @@ public class Blog {
         this.blogContent = blogContent;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 

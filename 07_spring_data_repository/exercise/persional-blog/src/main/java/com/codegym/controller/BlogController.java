@@ -35,7 +35,7 @@ public class BlogController {
 
     @PostMapping({"/create-blog"})
     public String saveBlog(@ModelAttribute("blog") Blog blog, RedirectAttributes redirectAttributes) {
-        blog.setStartTime(new Date(System.currentTimeMillis()));
+//        blog.setStartTime(new Date(System.currentTimeMillis()));
         blogService.save(blog);
         redirectAttributes.addFlashAttribute("message", "New blog created successfully");
         return "redirect:/blogs";
@@ -58,7 +58,7 @@ public class BlogController {
 
     @PostMapping({"/edit-blog"})
     public String updateBlog(@ModelAttribute("blog") Blog blog, RedirectAttributes redirectAttributes) {
-        blog.setStartTime(new Date(System.currentTimeMillis()));
+//        blog.setStartTime(new Date(System.currentTimeMillis()));
         blogService.save(blog);
         redirectAttributes.addFlashAttribute("message", "Blog updated successfully");
         return "redirect:/blogs";
