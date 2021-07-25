@@ -12,10 +12,11 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class BlogController {
@@ -24,6 +25,20 @@ public class BlogController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @GetMapping(value = {"/blogs", "/search"})
+    public ModelAndView listBlogs(@PageableDefault(value = 3, sort = "startTime",direction = Sort.Direction.DESC) Pageable pageable,
+                                  @RequestParam Optional<String> name) {
+        String nameValue = "";
+        if (name.isPresent()) {
+            nameValue = name.get();
+        }
+        ModelAndView modelAndView = new ModelAndView("/blog/list");
+        Page<Blog> blogs = blogService.findByBlogName(pageable, nameValue);
+        modelAndView.addObject("nameValue", nameValue);
+        modelAndView.addObject("blogs", blogs);
+        return modelAndView;
+    }
 
     @GetMapping("/create-blog")
     public String showCreateForm(Model model) {
@@ -35,17 +50,9 @@ public class BlogController {
 
     @PostMapping({"/create-blog"})
     public String saveBlog(@ModelAttribute("blog") Blog blog, RedirectAttributes redirectAttributes) {
-//        blog.setStartTime(new Date(System.currentTimeMillis()));
         blogService.save(blog);
         redirectAttributes.addFlashAttribute("message", "New blog created successfully");
         return "redirect:/blogs";
-    }
-
-    @GetMapping("/blogs")
-    public String listBlogs(@PageableDefault(value = 3, sort = "startTime",direction = Sort.Direction.DESC)Pageable pageable, Model model) {
-        Page<Blog> blogs = blogService.findAll(pageable);
-        model.addAttribute("blogs", blogs);
-        return "/blog/list";
     }
 
     @GetMapping("/edit-blog/{id}")
@@ -58,7 +65,6 @@ public class BlogController {
 
     @PostMapping({"/edit-blog"})
     public String updateBlog(@ModelAttribute("blog") Blog blog, RedirectAttributes redirectAttributes) {
-//        blog.setStartTime(new Date(System.currentTimeMillis()));
         blogService.save(blog);
         redirectAttributes.addFlashAttribute("message", "Blog updated successfully");
         return "redirect:/blogs";
@@ -72,7 +78,7 @@ public class BlogController {
 
     @PostMapping("/delete-blog")
     public String deleteBlog(@ModelAttribute("blog") Blog blog) {
-        blogService.delete(blog.getId());
+        blogService.deleteById(blog.getId());
         return "redirect:/blogs";
     }
 
@@ -80,12 +86,5 @@ public class BlogController {
     public String view(@PathVariable long id, Model model) {
         model.addAttribute("blog", blogService.findById(id));
         return "/blog/view";
-    }
-
-    @PostMapping("/search")
-    public String search(@RequestParam String name, Model model) {
-        List<Blog> blogs = blogService.findByName(name);
-        model.addAttribute("blogs", blogs);
-        return "/blog/list";
     }
 }

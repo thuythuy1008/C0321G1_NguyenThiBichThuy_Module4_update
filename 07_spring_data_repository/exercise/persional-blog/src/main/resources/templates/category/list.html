@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
     <title>Categorys</title>
 </head>
 <body>
 <a href="/create-category">Create new category</a>
+<br>
+<a href="/blogs">Blog list</a>
 <h1>Categorys</h1>
-<table border="1">
+<table class="blogs" border="1">
     <tr>
         <th>Category name</th>
         <th>Edit</th>
@@ -23,5 +25,6 @@
         </tr>
     </th:block>
 </table>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

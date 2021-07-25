@@ -12,13 +12,9 @@ import java.util.List;
 
 @Service
 public class BlogServiceImpl implements BlogService {
-    @Autowired
-    private BlogRepository blogRepository;
 
-    @Override
-    public Page<Blog> findAll(Pageable pageable) {
-        return blogRepository.findAll(pageable);
-    }
+    @Autowired
+    BlogRepository blogRepository;
 
     @Override
     public void save(Blog blog) {
@@ -31,14 +27,20 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void delete(Long id) {
-        blogRepository.delete(findById(id));
+    public void deleteById(Long id) {
+        blogRepository.deleteById(id);
     }
 
     @Override
-    public List<Blog> findByName(String name) {
-        return blogRepository.findByBlogNameContaining(name);
+    public Page<Blog> findByBlogName(Pageable pageable, String name) {
+        return blogRepository.findAllByBlogNameContaining(pageable, name);
     }
+
+//    @Override
+//    public Page<Blog> findAllSearchName(Pageable pageable, String name) {
+//        return blogRepository.getBlogBySearchingName(pageable,
+//                "%" + name + "%");
+//    }
 
     @Override
     public Iterable<Blog> findAllByCategory(Category category) {

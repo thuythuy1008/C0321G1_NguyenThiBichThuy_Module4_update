@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
     <title>Edit blog</title>
 </head>
@@ -12,7 +12,7 @@
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-<form th:action="@{/edit-blog}" th:object="${blog}" method="post">
+<form id="form" th:action="@{/edit-blog}" th:object="${blog}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
     <table>
         <tr>
@@ -45,5 +45,6 @@
         </tr>
     </table>
 </form>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

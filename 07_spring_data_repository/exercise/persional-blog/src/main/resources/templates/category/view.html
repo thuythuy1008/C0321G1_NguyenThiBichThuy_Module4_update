@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
     <title>View category</title>
 </head>
 <body>
 <h1>View category: <span th:text="${category.categoryName}"></span></h1>
 <a href="/categorys">Category list</a>
-<table border="1">
+<table class="blogs" border="1">
     <tr>
         <th>Blog name</th>
         <th>Blog summary</th>
@@ -27,5 +27,6 @@
         </tr>
     </th:block>
 </table>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

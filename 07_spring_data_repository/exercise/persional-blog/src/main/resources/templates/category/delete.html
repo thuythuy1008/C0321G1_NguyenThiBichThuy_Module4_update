@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
     <title>Delete category</title>
 </head>
@@ -10,7 +10,7 @@
 <p>
     <a href="/categorys">Category list</a>
 </p>
-<form th:action="@{/delete-category}" th:object="${category}" method="post">
+<form id="form" th:action="@{/delete-category}" th:object="${category}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
     <table>
         <tr>
@@ -23,5 +23,6 @@
         </tr>
     </table>
 </form>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>
