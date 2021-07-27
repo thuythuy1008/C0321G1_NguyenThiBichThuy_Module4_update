@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Book Loan App</h1>
+
+<table id="book" border="1">
+    <tr>
+        <th>ID</th>
+        <th>Book name</th>
+        <th>Category</th>
+        <th>Author</th>
+        <th>Quantity</th>
+        <th>Detail</th>
+    </tr>
+    <th:block th:each="item : ${books}">
+        <tr>
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.category}"></td>
+            <td th:text="${item.author}"></td>
+            <td th:text="${item.quantity}"></td>
+            <td><a th:href="@{/detail/__${item.id}__ }">Detail</a></td>
+        </tr>
+    </th:block>
+</table>
+<form th:action="@{/give-book-back}">
+    <button type="submit">Give book back</button>
+</form>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

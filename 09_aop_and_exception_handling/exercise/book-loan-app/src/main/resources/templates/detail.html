@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Create blog</title>
+</head>
+<body>
+<h1>Detail Book</h1>
+<p>
+    <a href="/books">Book list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form name="form" th:action="@{/detail}" th:object="${book}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Book name:</td>
+            <td><input type="text" size="95px" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Category:</td>
+            <td><input type="text" size="95px" th:field="*{category}"/></td>
+        </tr>
+        <tr>
+            <td>Author:</td>
+            <td><input type="text" size="95px" th:field="*{author}"/></td>
+        </tr>
+        <tr>
+            <td>Quantity:</td>
+            <td><input type="text" size="95px" th:field="*{quantity}"/></td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit">Borrow</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

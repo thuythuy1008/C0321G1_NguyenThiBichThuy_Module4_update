@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Create blog</title>
+</head>
+<body>
+<h1>Detail Book</h1>
+<p>
+    <a href="/books">Book list</a>
+</p>
+<form id="form" th:action="@{/pay}" method="post">
+    <input type="text" name="id">
+    <button type="submit">Give book back</button>
+</form>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
