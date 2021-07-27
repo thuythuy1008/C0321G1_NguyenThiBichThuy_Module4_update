@@ -48,10 +48,11 @@ public class BookController {
     }
 
     @PostMapping("/pay")
-    public String payBook(@RequestParam Integer id) {
+    public String payBook(@RequestParam Integer id, RedirectAttributes redirectAttributes) {
         Book book = bookService.findById(id);
         book.setQuantity(book.getQuantity() + 1);
         bookService.save(book);
+        redirectAttributes.addFlashAttribute("message", "successfully returned the book!");
         return "redirect:/books";
     }
 
