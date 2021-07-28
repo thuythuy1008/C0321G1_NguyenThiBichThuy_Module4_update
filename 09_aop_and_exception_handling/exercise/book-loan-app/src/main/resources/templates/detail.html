@@ -9,7 +9,7 @@
 <p>
     <a href="/books">Book list</a>
 </p>
-<form name="form" th:action="@{/detail}" th:object="${book}" method="post">
+<form id="form" th:action="@{/detail}" th:object="${book}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
     <table>
         <tr>
