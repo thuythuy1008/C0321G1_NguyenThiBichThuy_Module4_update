@@ -5,6 +5,7 @@ import com.codegym.model.entity.Product;
 import com.codegym.model.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,7 +30,7 @@ public class ProductController {
     }
 
     @GetMapping("/add/{id}")
-    public String addToCart(@PathVariable Long id, @ModelAttribute Cart cart, @RequestParam("action") String action) {
+    public String addToCart(@PathVariable Long id, @ModelAttribute Cart cart, @RequestParam("action") String action, Model model) {
         Optional<Product> productOptional = productService.findById(id);
         if (!productOptional.isPresent()) {
             return "/error.404";
@@ -38,7 +39,28 @@ public class ProductController {
             cart.addProduct(productOptional.get());
             return "redirect:/shopping-cart";
         }
+        if (action.equals("reduce")) {
+            cart.reduceProduct(productOptional.get());
+            return "redirect:/shopping-cart";
+        }
+        if (action.equals("detail")) {
+            model.addAttribute("product", productOptional.get());
+            cart.addProduct(productOptional.get());
+            return "/detail";
+        }
         cart.addProduct(productOptional.get());
         return "redirect:/shop";
+    }
+
+    @GetMapping("/detail/{id}")
+    public ModelAndView showDetail(@PathVariable Long id) {
+        return new ModelAndView("/detail", "product", productService.findById(id).get());
+    }
+
+    @GetMapping("/remove/{id}")
+    public String removeProduct(@PathVariable Long id, @ModelAttribute Cart cart) {
+        Optional<Product> productOptional = productService.findById(id);
+        cart.removeProduct(productOptional.get());
+        return "redirect:/shopping-cart";
     }
 }
