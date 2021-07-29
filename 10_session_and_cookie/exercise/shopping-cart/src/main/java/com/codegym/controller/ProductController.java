@@ -46,7 +46,7 @@ public class ProductController {
         if (action.equals("detail")) {
             model.addAttribute("product", productOptional.get());
             cart.addProduct(productOptional.get());
-            return "/detail";
+            return "redirect:/detail/{id}";
         }
         cart.addProduct(productOptional.get());
         return "redirect:/shop";
