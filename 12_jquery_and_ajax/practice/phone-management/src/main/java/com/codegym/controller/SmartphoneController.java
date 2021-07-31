@@ -43,4 +43,6 @@ public class SmartphoneController {
         return new ResponseEntity<>(smartphoneOptional.get(), HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/edit/{id}")
+
 }

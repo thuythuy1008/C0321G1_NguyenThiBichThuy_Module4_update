@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap4/css/bootstrap.css">
+</head>
+<body>
+<h1 style="color: red">Blogs</h1>
+
+<div class="container">
+    <div class="form-group form-check-inline">
+        <input type="text" class="form-control" id="inputSearch" placeholder="input name" name="name"
+               autocomplete="off">
+        <button type="submit" id="search" class="btn btn-secondary">Search</button>
+    </div>
+
+    <div class="alert alert-danger" role="alert" style="display: none">
+        <strong>No data</strong>
+    </div>
+
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Blog name</th>
+            <th>Blog summary</th>
+            <th>Start time</th>
+            <th>Category name</th>
+        </tr>
+    </table>
+
+    <button id="newPage" class="btn btn-primary">Page</button>
+</div>
+
+<script src="jquery/jquery-3.5.1.min.js"></script>
+<script src="jquery/popper.min.js"></script>
+<script src="bootstrap4/js/bootstrap.js"></script>
+
+<script>
+    let page = 0;
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/blogs/api/v1?page=" + page,
+            type: "GET",
+            dataType: 'json',
+            success: function (data) {
+                let tr = [];
+                for (let i = 0; i < data.content.length; i++) {
+                    tr.push('<tr>');
+                    tr.push('<td>' + data.content[i].id + '</td>');
+                    tr.push('<td>' + data.content[i].blogName + '</td>');
+                    tr.push('<td>' + data.content[i].blogSummary + '</td>');
+                    tr.push('<td>' + data.content[i].startTime + '</td>');
+                    tr.push('<td>' + data.content[i].category.categoryName + '</td>');
+                    tr.push('</tr>');
+                }
+                $('table').append($(tr.join('')));
+            }
+        })
+
+        $("#search").click(function () {
+            let value = $("#inputSearch").val();
+            $('table').empty();
+            $.ajax({
+                url: "http://localhost:8080/blogs/api/v1/search?name=" + value,
+                type: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    if (typeof data === 'undefined' || !data.length) {
+                        $('.alert-danger').css("display", "block");
+                    } else {
+                        $('.alert-danger').css("display", "none");
+                        let tr = [];
+                        for (let i = 0; i < data.length; i++) {
+                            tr.push('<tr>');
+                            tr.push('<td>' + data[i].id + '</td>');
+                            tr.push('<td>' + data[i].blogName + '</td>');
+                            tr.push('<td>' + data[i].blogSummary + '</td>');
+                            tr.push('<td>' + data[i].startTime + '</td>');
+                            tr.push('<td>' + data[i].category.categoryName + '</td>');
+                            tr.push('</tr>');
+                        }
+                        $('table').append($(tr.join('')));
+                    }
+                }
+            })
+        })
+
+        $("#newPage").click(function () {
+            page++;
+            $.ajax({
+                url: "http://localhost:8080/blogs/api/v1?page=" + page,
+                type: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    let tr = [];
+                    for (let i = 0; i < data.content.length; i++) {
+                        tr.push('<tr>');
+                        tr.push('<td>' + data.content[i].id + '</td>');
+                        tr.push('<td>' + data.content[i].blogName + '</td>');
+                        tr.push('<td>' + data.content[i].blogSummary + '</td>');
+                        tr.push('<td>' + data.content[i].startTime + '</td>');
+                        tr.push('<td>' + data.content[i].category.categoryName + '</td>');
+                        tr.push('</tr>');
+                    }
+                    $('table').append($(tr.join('')));
+                }
+            })
+        })
+    })
+</script>
+
+</body>
+</html>
