@@ -70,6 +70,13 @@
                         $('.alert-danger').css("display", "block");
                     } else {
                         $('.alert-danger').css("display", "none");
+                        let content = '<tr>\n' +
+                            '            <th>ID</th>\n' +
+                            '            <th>Blog name</th>\n' +
+                            '            <th>Blog summary</th>\n' +
+                            '            <th>Start time</th>\n' +
+                            '            <th>Category name</th>\n' +
+                            '        </tr>'
                         let tr = [];
                         for (let i = 0; i < data.length; i++) {
                             tr.push('<tr>');
@@ -80,7 +87,8 @@
                             tr.push('<td>' + data[i].category.categoryName + '</td>');
                             tr.push('</tr>');
                         }
-                        $('table').append($(tr.join('')));
+                        content += tr.join('');
+                        $('table').append(content);
                     }
                 }
             })

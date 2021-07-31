@@ -99,10 +99,10 @@
                     type: "GET",
                     url: `/smartphones/${smartphoneId}`,
                     success: function (data) {
+                        document.getElementById('id').value = data.id;
                         document.getElementById('producer').value = data.producer;
                         document.getElementById('model').value = data.model;
                         document.getElementById('price').value = data.price;
-                        document.getElementById('id').value = data.id;
                     }
                 });
                 event.preventDefault();
@@ -114,7 +114,7 @@
 <body>
 <form id="add-smartphone">
     <table>
-        <input type="hidden" id="id" placeholder="id"></td>
+        <input type="hidden" id="id">
         <tr>
             <td>Producer:</td>
             <td><input type="text" id="producer" placeholder="producer"></td>
