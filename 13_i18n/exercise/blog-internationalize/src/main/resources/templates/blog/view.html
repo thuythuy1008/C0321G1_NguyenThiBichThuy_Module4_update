@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Blog content</title>
+</head>
+<body>
+<h1>Blog content</h1>
+<p>
+    <a th:text="#{blog.list}" href="/blogs"></a>
+</p>
+<h2 th:text="${blog.blogName}"></h2>
+<span>Thuộc danh mục: </span><span th:text="${blog.category.categoryName}"></span>
+<p th:text="${blog.blogContent}"></p>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
