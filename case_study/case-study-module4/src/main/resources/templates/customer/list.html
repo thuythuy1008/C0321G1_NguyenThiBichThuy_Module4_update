@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="">Create new customer</a>
+<br>
+<!--<a href="/blogs">Blog list</a>-->
+<!--<br>-->
+<!--<a href="/categorys">Category list</a>-->
+<h1>Blogs</h1>
+
+<form th:action="@{/search}" method="get">
+    <input style="width: 200px" type="text" name="name" placeholder="Nhap ten can tim">
+    <button style="background: plum; margin: 5px" type="submit">Search</button>
+</form>
+
+<table class="blogs" border="1">
+    <tr>
+<!--        <th>Customer Id</th>-->
+        <th>Customer Code</th>
+        <th>Customer Name</th>
+        <th>Customer Birthday</th>
+        <th>Customer Gender</th>
+        <th>Customer Id Card</th>
+        <th>Customer Phone</th>
+        <th>Customer Email</th>
+        <th>Customer Address</th>
+        <th>Customer Type</th>
+<!--        <th>Actions</th>-->
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="customer : ${customers}">
+        <tr>
+            <td th:text="${customer.customerCode}"></td>
+            <td th:text="${customer.customerName}"></td>
+            <td th:text="${customer.customerBirthday}"></td>
+            <td th:text="${customer.customerGender}"></td>
+            <td th:text="${customer.customerIdCard}"></td>
+            <td th:text="${customer.customerPhone}"></td>
+            <td th:text="${customer.customerEmail}"></td>
+            <td th:text="${customer.customerAddress}"></td>
+            <td th:text="${customer.customerType.customerTypeName}"></td>
+            <td><a th:href="@{/edit-customer/__${customer.customerId}__ }">Edit</a></td>
+            <td><a id="modelTitleId" th:href="@{/delete-customer/__${customer.customerId}__ }">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+    Launch
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure???
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a th:href="@{'/customers'(page=${customers.number - 1}, name =${nameValue})}" th:if="${customers.hasPrevious()}">Previous</a>
+    <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>
+    <a th:href="@{'/customers'(page=${customers.number + 1}, name =${nameValue})}" th:if="${customers.hasNext()}">Next</a>
+</div>
+</body>
+</html>
