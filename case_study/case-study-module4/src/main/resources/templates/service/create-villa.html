@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Customer</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
+</head>
+<body>
+<div th:replace="/frame/navbar :: div"></div>
+<h1>Create Villa Service</h1>
+<a class="btn btn-primary" href="/list" role="button">Service list</a>
+<!--<p>-->
+<!--    <a href="/list">Service list</a>-->
+<!--</p>-->
+<!--<th:block th:if="${message}">-->
+<!--    <p th:text="${message}"></p>-->
+<!--</th:block>-->
+<form id="form" th:action="@{/create-service-villa}" th:object="${serviceDto}" method="post">
+    <table>
+        <input type="hidden" th:field="*{serviceId}"/>
+        <tr>
+            <td>Service Code:</td>
+            <td><input class="form-control" type="text" th:field="*{serviceCode}"/></td>
+            <td th:if="${#fields.hasErrors('serviceCode')}" th:errors="*{serviceCode}">Service Code Error</td>
+        </tr>
+        <tr>
+            <td>Service Name:</td>
+            <td><input class="form-control" type="text" th:field="*{serviceName}"/></td>
+            <td th:if="${#fields.hasErrors('serviceName')}" th:errors="*{serviceName}">Service Name Error</td>
+        </tr>
+        <tr>
+            <td>Service Area:</td>
+            <td><input class="form-control" type="text" th:field="*{serviceArea}"/></td>
+            <td th:if="${#fields.hasErrors('serviceArea')}" th:errors="*{serviceArea}">Service Area Error</td>
+        </tr>
+<!--        <tr>-->
+<!--            <td>Customer Gender:</td>-->
+<!--            <td><select class="form-control" th:field="*{customerGender}">-->
+<!--                <option th:value="0" th:text="Male"></option>-->
+<!--                <option th:value="1" th:text="Female"></option></select></td>-->
+<!--        </tr>-->
+        <tr>
+            <td>Service Cost:</td>
+            <td><input class="form-control" type="text" th:field="*{serviceCost}"/></td>
+            <td th:if="${#fields.hasErrors('serviceCost')}" th:errors="*{serviceCost}">Service Cost Error</td>
+        </tr>
+        <tr>
+            <td>Service Max People:</td>
+            <td><input class="form-control" type="text" th:field="*{serviceMaxPeople}"/></td>
+            <td th:if="${#fields.hasErrors('serviceMaxPeople')}" th:errors="*{serviceMaxPeople}">Service Max People Error</td>
+        </tr>
+        <tr>
+            <td>Standard Room:</td>
+            <td><input class="form-control" type="text" th:field="*{standardRoom}"/></td>
+            <td th:if="${#fields.hasErrors('standardRoom')}" th:errors="*{standardRoom}">Standard Room Error</td>
+        </tr>
+        <tr>
+            <td>Description Other Convenience:</td>
+            <td><input class="form-control" type="text" th:field="*{descriptionOtherConvenience}"/></td>
+            <td th:if="${#fields.hasErrors('descriptionOtherConvenience')}" th:errors="*{descriptionOtherConvenience}">Description Other Convenience Error</td>
+        </tr>
+        <tr>
+            <td>Poll Area:</td>
+            <td><input class="form-control" type="text" th:field="*{poolArea}"/></td>
+            <td th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}">Poll Area Error</td>
+        </tr>
+        <tr>
+            <td>Number Of Floors:</td>
+            <td><input class="form-control" type="text" th:field="*{numberOfFloors}"/></td>
+            <td th:if="${#fields.hasErrors('numberOfFloors')}" th:errors="*{numberOfFloors}">Number Of Floors Error</td>
+        </tr>
+        <tr>
+            <td>Service Type:</td>
+            <td>
+                <select class="form-control" th:field="*{serviceType.serviceTypeId}">
+                    <option th:each="item:${serviceTypeList}" th:text="${item.serviceTypeName}"
+                            th:value="${item.serviceTypeId}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Rent Type:</td>
+            <td>
+                <select class="form-control" th:field="*{rentType.rentTypeId}">
+                    <option th:each="item:${rentTypeList}" th:text="${item.rentTypeName}"
+                            th:value="${item.rentTypeId}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input class="btn btn-warning" type="submit" value="Create villa service"></td>
+        </tr>
+    </table>
+</form>
+
+<script src="/jquery/jquery-3.5.1.min.js"></script>
+<script src="/jquery/popper.min.js"></script>
+<script src="/bootstrap4/js/bootstrap.js"></script>
+</body>
+</html>

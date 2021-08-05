@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Customer</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
+</head>
+<body>
+<div th:replace="/frame/navbar :: div"></div>
+<h1>Create Customer</h1>
+<p>
+    <a href="/customer">Customer list</a>
+</p>
+<!--<th:block th:if="${message}">-->
+<!--    <p th:text="${message}"></p>-->
+<!--</th:block>-->
+<form id="form" th:action="@{/create-customer}" th:object="${customerDto}" method="post">
+    <table>
+        <input type="hidden" th:field="*{customerId}"/>
+        <tr>
+            <td>Customer Code:</td>
+            <td><input class="form-control" type="text" th:field="*{customerCode}"/></td>
+            <td th:if="${#fields.hasErrors('customerCode')}" th:errors="*{customerCode}">Customer Code Error</td>
+        </tr>
+        <tr>
+            <td>Customer Name:</td>
+            <td><input class="form-control" type="text" th:field="*{customerName}"/></td>
+            <td th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}">Customer Name Error</td>
+        </tr>
+        <tr>
+            <td>Customer Birthday:</td>
+            <td><input class="form-control" type="date" th:field="*{customerBirthday}"/></td>
+        </tr>
+        <tr>
+            <td>Customer Gender:</td>
+            <td><select class="form-control" th:field="*{customerGender}">
+                <option th:value="0" th:text="Male"></option>
+                <option th:value="1" th:text="Female"></option></select></td>
+        </tr>
+        <tr>
+            <td>Customer Id Card:</td>
+            <td><input class="form-control" type="text" th:field="*{customerIdCard}"/></td>
+            <td th:if="${#fields.hasErrors('customerIdCard')}" th:errors="*{customerIdCard}">Customer Id Card Error</td>
+        </tr>
+        <tr>
+            <td>Customer Phone:</td>
+            <td><input class="form-control" type="text" th:field="*{customerPhone}"/></td>
+            <td th:if="${#fields.hasErrors('customerPhone')}" th:errors="*{customerPhone}">Customer Phone Error</td>
+        </tr>
+        <tr>
+            <td>Customer Email:</td>
+            <td><input class="form-control" type="text" th:field="*{customerEmail}"/></td>
+            <td th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}">Customer Email Error</td>
+        </tr>
+        <tr>
+            <td>Customer Address:</td>
+            <td><input class="form-control" type="text" th:field="*{customerAddress}"/></td>
+            <td th:if="${#fields.hasErrors('customerAddress')}" th:errors="*{customerAddress}">Customer Address Error</td>
+        </tr>
+        <tr>
+            <td>Customer Type:</td>
+            <td>
+                <select class="form-control" th:field="*{customerType.customerTypeId}">
+                    <option th:each="item:${customerTypeList}" th:text="${item.customerTypeName}"
+                            th:value="${item.customerTypeId}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input class="btn btn-warning" type="submit" value="Create customer"></td>
+        </tr>
+    </table>
+</form>
+
+<script src="/jquery/jquery-3.5.1.min.js"></script>
+<script src="/jquery/popper.min.js"></script>
+<script src="/bootstrap4/js/bootstrap.js"></script>
+</body>
+</html>

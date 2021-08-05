@@ -2,48 +2,77 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit blog</title>
+    <title>Edit ...</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
 </head>
 <body>
-<h1>Edit blog</h1>
+<div th:replace="/frame/navbar :: div"></div>
+<h1>Edit ...</h1>
 <p>
-    <a href="/blogs">Blog list</a>
+    <a href="/customer">... list</a>
 </p>
-<th:block th:if="${message}">
-    <p th:text="${message}"></p>
-</th:block>
-<form id="form" th:action="@{/edit-blog}" th:object="${blog}" method="post">
-    <input th:type="hidden" name="id" th:field="*{id}">
+<form id="form" th:action="@{}" th:object="${}" method="post">
+<!--    <input th:type="hidden" name="id" th:field="*{}">-->
     <table>
+        <input type="hidden" th:field="*{}"/>
         <tr>
-            <td>Blog name:</td>
-            <td><input type="text" size="95px" th:field="*{blogName}" readonly/></td>
+            <td>:</td>
+            <td><input class="form-control" type="text" th:field="*{}"/></td>
+            <td th:if="${#fields.hasErrors('')}" th:errors="*{}">... Error</td>
         </tr>
         <tr>
-            <td>Blog summary:</td>
-            <td><textarea rows="5" cols="100px" th:field="*{blogSummary}" readonly></textarea></td>
+            <td>:</td>
+            <td><input class="form-control" type="text" th:field="*{}"/></td>
+            <td th:if="${#fields.hasErrors('')}" th:errors="*{}">... Error</td>
         </tr>
         <tr>
-            <td>Blog content:</td>
-            <td><textarea rows="5" cols="100px" th:field="*{blogContent}"></textarea></td>
+            <td>:</td>
+            <td><input class="form-control" type="date" th:field="*{}"/></td>
         </tr>
         <tr>
-            <td>Start time:</td>
-            <td><input type="date" size="95px" th:field="*{startTime}"/></td>
+            <td>:</td>
+            <td><select class="form-control" th:field="*{}">
+                <option th:value="0" th:text="Male"></option>
+                <option th:value="1" th:text="Female"></option></select></td>
         </tr>
         <tr>
-            <td>Category name:</td>
+            <td>:</td>
+            <td><input class="form-control" type="text" th:field="*{}"/></td>
+            <td th:if="${#fields.hasErrors('')}" th:errors="*{}">... Error</td>
+        </tr>
+        <tr>
+            <td>:</td>
+            <td><input class="form-control" type="text" th:field="*{}"/></td>
+            <td th:if="${#fields.hasErrors('')}" th:errors="*{}">... Error</td>
+        </tr>
+        <tr>
+            <td>:</td>
+            <td><input class="form-control" type="text" th:field="*{}"/></td>
+            <td th:if="${#fields.hasErrors('')}" th:errors="*{}">... Error</td>
+        </tr>
+        <tr>
+            <td>:</td>
+            <td><input class="form-control" type="text" th:field="*{}"/></td>
+            <td th:if="${#fields.hasErrors('')}" th:errors="*{}">... Error</td>
+        </tr>
+        <tr>
+            <td>:</td>
             <td>
-                <select th:field="*{category.id}">
-                    <option th:each="item:${categoryList}" th:text="${item.categoryName}" th:value="${item.id}"></option>
+                <select class="form-control" th:field="*{}">
+                    <option th:each="item:${}" th:text="${item.}"
+                            th:value="${item.}"></option>
                 </select>
             </td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Update blog"></td>
+            <td><input class="btn btn-warning" type="submit" value="Edit ..."></td>
         </tr>
     </table>
 </form>
+
+<script src="/jquery/jquery-3.5.1.min.js"></script>
+<script src="/jquery/popper.min.js"></script>
+<script src="/bootstrap4/js/bootstrap.js"></script>
 </body>
 </html>
