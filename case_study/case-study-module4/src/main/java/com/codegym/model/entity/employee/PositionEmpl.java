@@ -20,6 +20,6 @@ public class PositionEmpl {
     private Integer positionId;
     private String positionName;
 
-    @OneToMany(mappedBy = "positionEmpl", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "positionEmpl")
     private Set<Employee> employees;
 }

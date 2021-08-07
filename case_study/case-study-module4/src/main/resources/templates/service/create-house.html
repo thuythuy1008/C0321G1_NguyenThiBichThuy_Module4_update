@@ -16,71 +16,76 @@
 <!--    <p th:text="${message}"></p>-->
 <!--</th:block>-->
 <form id="form" th:action="@{/create-service-house}" th:object="${serviceDto}" method="post">
-    <table>
-        <input type="hidden" th:field="*{serviceId}"/>
-        <tr>
-            <td>Service Code:</td>
-            <td><input class="form-control" type="text" th:field="*{serviceCode}"/></td>
-            <td th:if="${#fields.hasErrors('serviceCode')}" th:errors="*{serviceCode}">Service Code Error</td>
-        </tr>
-        <tr>
-            <td>Service Name:</td>
-            <td><input class="form-control" type="text" th:field="*{serviceName}"/></td>
-            <td th:if="${#fields.hasErrors('serviceName')}" th:errors="*{serviceName}">Service Name Error</td>
-        </tr>
-        <tr>
-            <td>Service Area:</td>
-            <td><input class="form-control" type="text" th:field="*{serviceArea}"/></td>
-            <td th:if="${#fields.hasErrors('serviceArea')}" th:errors="*{serviceArea}">Service Area Error</td>
-        </tr>
-        <tr>
-            <td>Service Cost:</td>
-            <td><input class="form-control" type="text" th:field="*{serviceCost}"/></td>
-            <td th:if="${#fields.hasErrors('serviceCost')}" th:errors="*{serviceCost}">Service Cost Error</td>
-        </tr>
-        <tr>
-            <td>Service Max People:</td>
-            <td><input class="form-control" type="text" th:field="*{serviceMaxPeople}"/></td>
-            <td th:if="${#fields.hasErrors('serviceMaxPeople')}" th:errors="*{serviceMaxPeople}">Service Max People Error</td>
-        </tr>
-        <tr>
-            <td>Standard Room:</td>
-            <td><input class="form-control" type="text" th:field="*{standardRoom}"/></td>
-            <td th:if="${#fields.hasErrors('standardRoom')}" th:errors="*{standardRoom}">Standard Room Error</td>
-        </tr>
-        <tr>
-            <td>Description Other Convenience:</td>
-            <td><input class="form-control" type="text" th:field="*{descriptionOtherConvenience}"/></td>
-            <td th:if="${#fields.hasErrors('descriptionOtherConvenience')}" th:errors="*{descriptionOtherConvenience}">Description Other Convenience Error</td>
-        </tr>
-        <tr>
-            <td>Number Of Floors:</td>
-            <td><input class="form-control" type="text" th:field="*{numberOfFloors}"/></td>
-            <td th:if="${#fields.hasErrors('numberOfFloors')}" th:errors="*{numberOfFloors}">Number Of Floors Error</td>
-        </tr>
-        <tr>
-            <td>Service Type:</td>
-            <td>
-                <select class="form-control" th:field="*{serviceType.serviceTypeId}">
-                    <option th:each="item:${serviceTypeList}" th:text="${item.serviceTypeName}"
-                            th:value="${item.serviceTypeId}"></option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Rent Type:</td>
-            <td>
-                <select class="form-control" th:field="*{rentType.rentTypeId}">
-                    <option th:each="item:${rentTypeList}" th:text="${item.rentTypeName}"
-                            th:value="${item.rentTypeId}"></option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input class="btn btn-warning" type="submit" value="Create house service"></td>
-        </tr>
-    </table>
+    <input type="hidden" th:field="*{serviceId}"/>
+    <div class="container">
+        <div class="form-group">
+            <label>Service Code:</label>
+            <input type="text" class="form-control" th:field="*{serviceCode}">
+            <p class="text-danger" th:if="${#fields.hasErrors('serviceCode')}" th:errors="*{serviceCode}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Service Name:</label>
+            <input type="text" class="form-control" th:field="*{serviceName}">
+            <p class="text-danger" th:if="${#fields.hasErrors('serviceName')}" th:errors="*{serviceName}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Service Area:</label>
+            <input type="text" class="form-control" th:field="*{serviceArea}">
+            <p class="text-danger" th:if="${#fields.hasErrors('serviceArea')}" th:errors="*{serviceArea}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Service Cost:</label>
+            <input type="text" class="form-control" th:field="*{serviceCost}">
+            <p class="text-danger" th:if="${#fields.hasErrors('serviceCost')}" th:errors="*{serviceCost}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Service Max People:</label>
+            <input type="text" class="form-control" th:field="*{serviceMaxPeople}">
+            <p class="text-danger" th:if="${#fields.hasErrors('serviceMaxPeople')}" th:errors="*{serviceMaxPeople}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Standard Room:</label>
+            <input type="text" class="form-control" th:field="*{standardRoom}">
+            <p class="text-danger" th:if="${#fields.hasErrors('standardRoom')}" th:errors="*{standardRoom}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Description Other Convenience:</label>
+            <input type="text" class="form-control" th:field="*{descriptionOtherConvenience}">
+            <p class="text-danger" th:if="${#fields.hasErrors('descriptionOtherConvenience')}" th:errors="*{descriptionOtherConvenience}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Number Of Floors:</label>
+            <input type="text" class="form-control" th:field="*{numberOfFloors}">
+            <p class="text-danger" th:if="${#fields.hasErrors('numberOfFloors')}" th:errors="*{numberOfFloors}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Service Type:</label>
+            <select class="form-control" th:field="*{serviceType.serviceTypeId}">
+                <option th:each="item:${serviceTypeList}" th:text="${item.serviceTypeName}"
+                        th:value="${item.serviceTypeId}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Rent Type:</label>
+            <select class="form-control" th:field="*{rentType.rentTypeId}">
+                <option th:each="item:${rentTypeList}" th:text="${item.rentTypeName}"
+                        th:value="${item.rentTypeId}"></option>
+            </select>
+        </div>
+
+        <div>
+            <input class="btn btn-warning" type="submit" value="Create villa service">
+        </div>
+    </div>
 </form>
 
 <script src="/jquery/jquery-3.5.1.min.js"></script>

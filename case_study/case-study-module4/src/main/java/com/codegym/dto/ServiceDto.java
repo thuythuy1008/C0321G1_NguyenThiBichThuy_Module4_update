@@ -31,11 +31,11 @@ public class ServiceDto {
     private Integer serviceArea;
 
     @NotNull
-    @Min(1)
+    @Positive
     private Integer serviceCost;
 
     @NotNull
-    @Min(1)
+    @Positive
     private Integer serviceMaxPeople;
 
     @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Ll}]|[\\p{Ll}][\\p{Ll}]{1,10})){0,5}$",
@@ -49,7 +49,7 @@ public class ServiceDto {
     @Min(20)
     private Integer poolArea;
 
-    @Min(1)
+    @Positive
     private Integer numberOfFloors;
 
     private ServiceType serviceType;

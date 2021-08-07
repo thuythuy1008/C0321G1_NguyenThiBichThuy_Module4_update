@@ -1,6 +1,7 @@
 package com.codegym.controller;
 
 import com.codegym.dto.CustomerDto;
+import com.codegym.dto.EmployeeDto;
 import com.codegym.model.entity.customer.Customer;
 import com.codegym.model.entity.customer.CustomerType;
 import com.codegym.model.entity.employee.Division;
@@ -58,50 +59,54 @@ public class EmployeeController {
         return modelAndView;
     }
 
-//    @PostMapping("/delete-customer")
-//    public String showDeleteForm(@RequestParam Integer id) {
-//        customerService.delete(id);
-//        return "redirect:/customer";
-//    }
-//
-//    @GetMapping("/create-customer")
-//    public String showCreateForm(Model model) {
-//        model.addAttribute("customerDto", new CustomerDto());
-//        return "/customer/create";
-//    }
-//
-//    @PostMapping({"/create-customer"})
-//    public String checkValidation(@Valid @ModelAttribute("customerDto") CustomerDto customerDto,
-//                                  BindingResult bindingResult) {
-//        if (bindingResult.hasFieldErrors()) {
-//            return "/customer/create";
-//        } else {
-//            Customer customer = new Customer();
-//            BeanUtils.copyProperties(customerDto, customer);
-//            customerService.save(customer);
-//            return "redirect:/customer";
-//        }
-//    }
-//
-//    @GetMapping("/edit-customer/{id}")
-//    public String showEditForm(@PathVariable Integer id, Model model) {
-//        Customer customer = customerService.findById(id);
-//        CustomerDto customerDto = new CustomerDto();
-//        BeanUtils.copyProperties(customer, customerDto);
-//        model.addAttribute("customerDto", customerDto);
-//        return "/customer/edit";
-//    }
-//
-//    @PostMapping({"/edit-customer"})
-//    public String updateBlog(@Valid @ModelAttribute("customerDto") CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-//        if (bindingResult.hasFieldErrors()) {
-//            return "/customer/edit";
-//        } else {
-//            Customer customer = new Customer();
-//            BeanUtils.copyProperties(customerDto, customer);
-//            customerService.save(customer);
-//            redirectAttributes.addFlashAttribute("message", "Blog updated successfully");
-//            return "redirect:/customer";
-//        }
-//    }
+    @PostMapping("/delete-employee")
+    public String showDeleteForm(@RequestParam Optional<Integer> id) {
+        Employee employee = employeeService.findById(id.get());
+        employee.setFlag(1);
+        employeeService.save(employee);
+        return "redirect:/employee";
+    }
+
+    @GetMapping("/create-employee")
+    public String showCreateForm(Model model) {
+        model.addAttribute("employeeDto", new EmployeeDto());
+        return "/employee/create";
+    }
+
+    @PostMapping({"/create-employee"})
+    public String checkValidation(@Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto,
+                                  BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasFieldErrors()) {
+            return "/employee/create";
+        } else {
+            Employee employee = new Employee();
+            BeanUtils.copyProperties(employeeDto, employee);
+            employeeService.save(employee);
+            redirectAttributes.addFlashAttribute("message", "Employee created successfully!!!");
+            return "redirect:/employee";
+        }
+    }
+
+    @GetMapping("/edit-employee/{id}")
+    public String showEditForm(@PathVariable Integer id, Model model) {
+        Employee employee = employeeService.findById(id);
+        EmployeeDto employeeDto = new EmployeeDto();
+        BeanUtils.copyProperties(employee, employeeDto);
+        model.addAttribute("employeeDto", employeeDto);
+        return "/employee/edit";
+    }
+
+    @PostMapping({"/edit-employee"})
+    public String updateEmployee(@Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto,
+                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasFieldErrors()) {
+            return "/employee/edit";
+        } else {
+            Employee employee = new Employee();
+            BeanUtils.copyProperties(employeeDto, employee);
+            employeeService.save(employee);
+            redirectAttributes.addFlashAttribute("message", "Employee updated successfully!!!");
+            return "redirect:/employee";
+        }
+    }
 }

@@ -21,6 +21,6 @@ public class RentType {
     private String rentTypeName;
     private Integer rentTypeCost;
 
-    @OneToMany(mappedBy = "rentType", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "rentType")
     private Set<Service> service;
 }

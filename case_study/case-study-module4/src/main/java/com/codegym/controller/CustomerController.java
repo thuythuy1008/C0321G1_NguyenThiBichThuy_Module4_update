@@ -45,8 +45,13 @@ public class CustomerController {
     }
 
     @PostMapping("/delete-customer")
-    public String showDeleteForm(@RequestParam Integer id) {
-        customerService.delete(id);
+    public String showDeleteForm(@RequestParam Optional<Integer> id) {
+        Customer customer = customerService.findById(id.get());
+//        if (customer == null) {
+//
+//        }
+        customer.setFlag(1);
+        customerService.save(customer);
         return "redirect:/customer";
     }
 
@@ -58,13 +63,14 @@ public class CustomerController {
 
     @PostMapping({"/create-customer"})
     public String checkValidation(@Valid @ModelAttribute("customerDto") CustomerDto customerDto,
-                                  BindingResult bindingResult) {
+                                  BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasFieldErrors()) {
             return "/customer/create";
         } else {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
             customerService.save(customer);
+            redirectAttributes.addFlashAttribute("message", "Customer created successfully!!!");
             return "redirect:/customer";
         }
     }
@@ -79,14 +85,15 @@ public class CustomerController {
     }
 
     @PostMapping({"/edit-customer"})
-    public String updateBlog(@Valid @ModelAttribute("customerDto") CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String updateCustomer(@Valid @ModelAttribute("customerDto") CustomerDto customerDto,
+                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasFieldErrors()) {
             return "/customer/edit";
         } else {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
             customerService.save(customer);
-            redirectAttributes.addFlashAttribute("message", "Blog updated successfully");
+            redirectAttributes.addFlashAttribute("message", "Customer updated successfully!!!");
             return "redirect:/customer";
         }
     }

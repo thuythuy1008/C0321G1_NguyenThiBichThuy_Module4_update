@@ -1,7 +1,6 @@
-package com.codegym.model.entity.contractDetail;
+package com.codegym.model.entity.contract_detail;
 
 import com.codegym.model.entity.contract.Contract;
-import com.codegym.model.entity.contractDetail.AttachService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,4 +27,5 @@ public class ContractDetail {
     private AttachService attachService;
 
     private Integer quantity;
+    private int flag;
 }

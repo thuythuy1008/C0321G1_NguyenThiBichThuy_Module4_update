@@ -1,4 +1,4 @@
-package com.codegym.model.entity.contractDetail;
+package com.codegym.model.entity.contract_detail;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +22,6 @@ public class AttachService {
     private Integer attachServiceUnit;
     private String attachServiceStatus;
 
-    @OneToMany(mappedBy = "attachService", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "attachService")
     private Set<ContractDetail> contractDetail;
 }

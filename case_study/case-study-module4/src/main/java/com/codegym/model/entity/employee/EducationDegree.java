@@ -20,6 +20,6 @@ public class EducationDegree {
     private Integer educationDegreeId;
     private String educationDegreeName;
 
-    @OneToMany(mappedBy = "educationDegree", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "educationDegree")
     private Set<Employee> employees;
 }

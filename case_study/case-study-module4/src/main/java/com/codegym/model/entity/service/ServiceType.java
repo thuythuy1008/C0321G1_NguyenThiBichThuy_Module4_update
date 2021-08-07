@@ -20,6 +20,6 @@ public class ServiceType {
     private Integer serviceTypeId;
     private String serviceTypeName;
 
-    @OneToMany(mappedBy = "serviceType", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "serviceType")
     private Set<Service> service;
 }

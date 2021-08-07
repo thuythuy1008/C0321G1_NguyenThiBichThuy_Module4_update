@@ -33,7 +33,8 @@ public class Customer {
     @JoinColumn(name = "customer_type_id", referencedColumnName = "customerTypeId")
     private CustomerType customerType;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer")
     private Set<Contract> contract;
 
+    private int flag;
 }

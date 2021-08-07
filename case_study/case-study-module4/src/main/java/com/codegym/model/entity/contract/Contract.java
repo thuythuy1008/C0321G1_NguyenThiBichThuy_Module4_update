@@ -1,6 +1,6 @@
 package com.codegym.model.entity.contract;
 
-import com.codegym.model.entity.contractDetail.ContractDetail;
+import com.codegym.model.entity.contract_detail.ContractDetail;
 import com.codegym.model.entity.customer.Customer;
 import com.codegym.model.entity.employee.Employee;
 import com.codegym.model.entity.service.Service;
@@ -43,6 +43,8 @@ public class Contract {
     @JoinColumn(name = "service_id", referencedColumnName = "serviceId")
     private Service service;
 
-    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "contract")
     private Set<ContractDetail> contractDetail;
+
+    private int flag;
 }

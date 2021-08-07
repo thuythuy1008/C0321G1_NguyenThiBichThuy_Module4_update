@@ -1,6 +1,7 @@
 package com.codegym.model.entity.employee;
 
 import com.codegym.model.entity.contract.Contract;
+import com.codegym.model.entity.security.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,12 @@ public class Employee {
     @JoinColumn(name = "division_id", referencedColumnName = "divisionId")
     private Division division;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee")
     private Set<Contract> contract;
+
+    @OneToOne
+    @JoinColumn(name = "user_name", referencedColumnName = "userName")
+    private AppUser appUser;
+
+    private int flag;
 }

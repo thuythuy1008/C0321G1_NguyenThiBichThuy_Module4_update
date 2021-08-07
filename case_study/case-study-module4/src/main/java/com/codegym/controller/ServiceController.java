@@ -115,8 +115,10 @@ public class ServiceController {
     }
 
     @PostMapping("/delete-service")
-    public String showDeleteForm(@RequestParam Integer id) {
-        serviceService.delete(id);
+    public String showDeleteForm(@RequestParam Optional<Integer> id) {
+        Service service = serviceService.findById(id.get());
+        service.setFlag(1);
+        serviceService.save(service);
         return "redirect:/list";
     }
 
