@@ -20,16 +20,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerTypeRepository customerTypeRepository;
 
-//    @Override
-//    public List<Customer> findAll() {
-//        return customerRepository.findAll();
-//    }
-//
-//    @Override
-//    public Page<Customer> findAll(Pageable pageable) {
-//        return customerRepository.findAll(pageable);
-//    }
-
     @Override
     public void save(Customer customer) {
         customerRepository.save(customer);

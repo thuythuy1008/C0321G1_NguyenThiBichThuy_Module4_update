@@ -19,10 +19,10 @@ public class AppUser {
     private String userName;
     private String userPassword;
 
-    @ManyToMany
-    @JoinTable (name = "user_role",
-    joinColumns = @JoinColumn(name = "user_name"),
-    inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_name"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<AppRole> appRoles;
 
     @OneToOne(mappedBy = "appUser")

@@ -46,10 +46,11 @@ public class ContractDetailController {
     }
 
     @PostMapping("/delete-contract-detail")
-    public String showDeleteForm(@RequestParam Optional<Integer> id) {
+    public String showDeleteForm(@RequestParam Optional<Integer> id, RedirectAttributes redirectAttributes) {
         ContractDetail contractDetail = contractDetailService.findById(id.get());
         contractDetail.setFlag(1);
         contractDetailService.save(contractDetail);
+        redirectAttributes.addFlashAttribute("message", "Contract detail deleted successfully!!!");
         return "redirect:/contract-detail";
     }
 
@@ -84,7 +85,7 @@ public class ContractDetailController {
 
     @PostMapping({"/edit-contract-detail"})
     public String updateContractDetail(@Valid @ModelAttribute("contractDetailDto") ContractDetailDto contractDetailDto,
-                                 BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasFieldErrors()) {
             return "/contract_detail/edit";
         } else {

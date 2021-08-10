@@ -60,10 +60,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/delete-employee")
-    public String showDeleteForm(@RequestParam Optional<Integer> id) {
+    public String showDeleteForm(@RequestParam Optional<Integer> id, RedirectAttributes redirectAttributes) {
         Employee employee = employeeService.findById(id.get());
         employee.setFlag(1);
         employeeService.save(employee);
+        redirectAttributes.addFlashAttribute("message", "Employee deleted successfully!!!");
         return "redirect:/employee";
     }
 
@@ -76,6 +77,7 @@ public class EmployeeController {
     @PostMapping({"/create-employee"})
     public String checkValidation(@Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new EmployeeDto().validate(employeeDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "/employee/create";
         } else {
@@ -98,7 +100,8 @@ public class EmployeeController {
 
     @PostMapping({"/edit-employee"})
     public String updateEmployee(@Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto,
-                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                                 BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new EmployeeDto().validate(employeeDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "/employee/edit";
         } else {

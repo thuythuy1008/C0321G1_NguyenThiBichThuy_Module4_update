@@ -58,33 +58,9 @@ public class CustomerUserServiceController {
     }
 
     @PostMapping("/delete-customer-user-service")
-    public String showDeleteForm(@RequestParam Integer id) {
-        System.out.println(id);
+    public String showDeleteForm(@RequestParam Integer id, RedirectAttributes redirectAttributes) {
         customerUserServiceService.delete(id);
-
+        redirectAttributes.addFlashAttribute("message", "Customer user service deleted successfully!!!");
         return "redirect:/customer-user-service";
-    }
-
-    @GetMapping("/edit-customer-user-service/{id}")
-    public String showEditForm(@PathVariable Integer id, Model model) {
-        Customer customer = customerUserServiceService.findById(id);
-        CustomerDto customerDto = new CustomerDto();
-        BeanUtils.copyProperties(customer, customerDto);
-        model.addAttribute("customerDto", customerDto);
-        return "/customer_user_service/edit";
-    }
-
-    @PostMapping({"/edit-customer-user-service"})
-    public String updateCustomer(@Valid @ModelAttribute("customerDto") CustomerDto customerDto,
-                                 BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasFieldErrors()) {
-            return "/customer_user_service/edit";
-        } else {
-            Customer customer = new Customer();
-            BeanUtils.copyProperties(customerDto, customer);
-            customerUserServiceService.save(customer);
-            redirectAttributes.addFlashAttribute("message", "Customer updated successfully!!!");
-            return "redirect:/customer-user-service";
-        }
     }
 }

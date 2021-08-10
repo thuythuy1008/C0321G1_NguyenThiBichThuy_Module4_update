@@ -10,6 +10,4 @@ import org.springframework.data.jpa.repository.Query;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     @Query(value = "select * from employee where employee.employee_name like %?1% and flag = 0", nativeQuery = true)
     Page<Employee> findAllByEmployeeNameContaining(Pageable pageable, String name);
-
-//    Employee findByEmployeeNameContaining(String name);
 }

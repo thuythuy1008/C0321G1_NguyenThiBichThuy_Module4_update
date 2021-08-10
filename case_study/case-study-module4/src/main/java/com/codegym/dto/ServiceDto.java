@@ -19,11 +19,11 @@ public class ServiceDto {
     private Integer serviceId;
 
     @NotEmpty
-    @Pattern(regexp = "^(DV)-[0-9]{4}$", message = "Vui lòng nhập lại theo định dạng : DV-XXXX (X là số 0-9)")
+    @Pattern(regexp = "^(DV)-[0-9]{4}$", message = "Please re-enter in the format: DV-XXXX (X: 0-9)")
     private String serviceCode;
 
     @NotEmpty
-    @Pattern(regexp = "^([A-Z][a-z0-9]*[\\s]?)+$", message = "Vui lòng viết hoa chữ cái đầu tiên của mỗi từ!")
+    @Pattern(regexp = "^([A-Z][a-z0-9]*[\\s]?)+$", message = "Please capitalize the first letter of each word!")
     private String serviceName;
 
     @NotNull
@@ -39,11 +39,11 @@ public class ServiceDto {
     private Integer serviceMaxPeople;
 
     @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Ll}]|[\\p{Ll}][\\p{Ll}]{1,10})){0,5}$",
-            message = "Vui lòng viết hoa chữ cái đầu tiên của từ đầu tiên!")
+            message = "Please capitalize the first letter of the first word!")
     private String standardRoom;
 
     @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Ll}]|[\\p{Ll}][\\p{Ll}]{1,10})){0,5}$",
-            message = "Vui lòng viết hoa chữ cái đầu tiên của từ đầu tiên!")
+            message = "Please capitalize the first letter of the first word!")
     private String descriptionOtherConvenience;
 
     @Min(20)

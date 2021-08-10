@@ -10,6 +10,4 @@ import org.springframework.data.jpa.repository.Query;
 public interface ContractRepository extends JpaRepository<Contract, Integer> {
     @Query(value = "select * from contract where flag = 0", nativeQuery = true)
     Page<Contract> findAll(Pageable pageable);
-
-//    Page<Contract> findAllByEmployeeNameContaining(Employee employee);
 }

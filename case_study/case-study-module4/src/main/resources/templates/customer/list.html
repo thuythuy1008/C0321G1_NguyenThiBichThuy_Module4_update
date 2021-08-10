@@ -8,9 +8,10 @@
 <body>
 <div th:replace="/frame/navbar :: div"></div>
 <h1 class="text-center" style="color:crimson">Customer List</h1>
-<th:block th:if="${message}">
-    <p style="color: red" th:text="${message}"></p>
-</th:block>
+<div th:if="${message}" class="alert alert-warning" role="alert">
+    <strong style="color: red" th:text="${message}"></strong>
+</div>
+
 <a class="btn btn-primary mb-2 ml-4" href="/create-customer" role="button">Create new customer</a>
 
 <form th:action="@{/customer/search}" method="get" class="form-inline my-2 my-lg-0 mr-4" style="float:right">
@@ -87,12 +88,6 @@
         </div>
     </div>
 </form>
-<!--<div>-->
-<!--    <a th:href="@{'/customer'(page=${customers.number - 1}, name =${nameValue})}" th:if="${customers.hasPrevious()}">Previous</a>-->
-<!--    <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>-->
-<!--    <a th:href="@{'/customer'(page=${customers.number + 1}, name =${nameValue})}"-->
-<!--       th:if="${customers.hasNext()}">Next</a>-->
-<!--</div>-->
 
 <nav class="float-right mr-4" aria-label="Page navigation example">
     <ul class="pagination">
@@ -104,8 +99,6 @@
             </a>
         </li>
         <li class="page-item"><a class="page-link" th:text="${customers.number + 1}"></a></li>
-        <!--        <li class="page-item"><a class="page-link" href="#" th:text="${customers.number + 2}"></a></li>-->
-        <!--        <li class="page-item"><a class="page-link" href="#" th:text="${customers.number + 3}"></a></li>-->
         <li class="page-item">
             <a class="page-link" th:href="@{'/customer'(page=${customers.number + 1}, name =${nameValue})}"
                th:if="${customers.hasNext()}" aria-label="Next">
@@ -114,7 +107,6 @@
         </li>
     </ul>
 </nav>
-
 
 <script>
     function deleteCustomer(id) {

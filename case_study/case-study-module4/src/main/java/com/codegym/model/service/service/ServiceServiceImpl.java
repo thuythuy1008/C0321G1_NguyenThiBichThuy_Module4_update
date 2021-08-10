@@ -24,6 +24,11 @@ public class ServiceServiceImpl implements ServiceService {
     private RentTypeRepository rentTypeRepository;
 
     @Override
+    public List<Service> findAll() {
+        return serviceRepository.findAll();
+    }
+
+    @Override
     public void save(Service service) {
         serviceRepository.save(service);
     }

@@ -9,12 +9,7 @@
 <div th:replace="/frame/navbar :: div"></div>
 <h1>Create House Service</h1>
 <a class="btn btn-primary" href="/list" role="button">Service list</a>
-<!--<p>-->
-<!--    <a href="/list">Service list</a>-->
-<!--</p>-->
-<!--<th:block th:if="${message}">-->
-<!--    <p th:text="${message}"></p>-->
-<!--</th:block>-->
+
 <form id="form" th:action="@{/create-service-house}" th:object="${serviceDto}" method="post">
     <input type="hidden" th:field="*{serviceId}"/>
     <div class="container">
@@ -32,13 +27,22 @@
 
         <div class="form-group">
             <label>Service Area:</label>
-            <input type="text" class="form-control" th:field="*{serviceArea}">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" th:field="*{serviceArea}">
+                <span class="input-group-text">.00</span>
+            </div>
+<!--            <input type="text" class="form-control" th:field="*{serviceArea}">-->
             <p class="text-danger" th:if="${#fields.hasErrors('serviceArea')}" th:errors="*{serviceArea}"></p>
         </div>
 
         <div class="form-group">
             <label>Service Cost:</label>
-            <input type="text" class="form-control" th:field="*{serviceCost}">
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" th:field="*{serviceCost}">
+                <span class="input-group-text">VND</span>
+            </div>
+<!--            <input type="text" class="form-control" th:field="*{serviceCost}">-->
             <p class="text-danger" th:if="${#fields.hasErrors('serviceCost')}" th:errors="*{serviceCost}"></p>
         </div>
 
@@ -57,7 +61,8 @@
         <div class="form-group">
             <label>Description Other Convenience:</label>
             <input type="text" class="form-control" th:field="*{descriptionOtherConvenience}">
-            <p class="text-danger" th:if="${#fields.hasErrors('descriptionOtherConvenience')}" th:errors="*{descriptionOtherConvenience}"></p>
+            <p class="text-danger" th:if="${#fields.hasErrors('descriptionOtherConvenience')}"
+               th:errors="*{descriptionOtherConvenience}"></p>
         </div>
 
         <div class="form-group">

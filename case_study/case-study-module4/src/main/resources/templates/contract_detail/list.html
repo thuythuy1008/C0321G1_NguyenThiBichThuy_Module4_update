@@ -8,9 +8,9 @@
 <body>
 <div th:replace="/frame/navbar :: div"></div>
 <h1 class="text-center" style="color:crimson">Contract Detail List</h1>
-<th:block th:if="${message}">
-    <p style="color: red" th:text="${message}"></p>
-</th:block>
+<div th:if="${message}" class="alert alert-warning" role="alert">
+    <strong style="color: red" th:text="${message}"></strong>
+</div>
 
 <a class="btn btn-primary mb-2 ml-4" href="/create-contract-detail" role="button">Create new contract detail</a>
 
@@ -74,13 +74,16 @@
 <nav class="float-right mr-4" aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item">
-            <a class="page-link" aria-label="Previous" th:href="@{'/contract-detail'(page=${contractDetails.number - 1})}" th:if="${contractDetails.hasPrevious()}">
+            <a class="page-link" aria-label="Previous"
+               th:href="@{'/contract-detail'(page=${contractDetails.number - 1})}"
+               th:if="${contractDetails.hasPrevious()}">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li class="page-item"><a class="page-link" th:text="${contractDetails.number + 1}"></a></li>
         <li class="page-item">
-            <a class="page-link" th:href="@{'/contract-detail'(page=${contractDetails.number + 1})}" th:if="${contractDetails.hasNext()}" aria-label="Next">
+            <a class="page-link" th:href="@{'/contract-detail'(page=${contractDetails.number + 1})}"
+               th:if="${contractDetails.hasNext()}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

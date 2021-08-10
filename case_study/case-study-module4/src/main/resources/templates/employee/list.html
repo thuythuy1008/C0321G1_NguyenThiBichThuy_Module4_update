@@ -8,9 +8,9 @@
 <body>
 <div th:replace="/frame/navbar :: div"></div>
 <h1 class="text-center" style="color:crimson;">Employee List</h1>
-<th:block th:if="${message}">
-    <p style="color: red" th:text="${message}"></p>
-</th:block>
+<div th:if="${message}" class="alert alert-warning" role="alert">
+    <strong style="color: red" th:text="${message}"></strong>
+</div>
 <a class="btn btn-primary mb-2 ml-4" href="/create-employee" role="button">Create new employee</a>
 
 <form th:action="@{/employee/search}" method="get" class="form-inline my-2 my-lg-0 mr-4" style="float:right">

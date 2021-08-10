@@ -10,9 +10,6 @@
 <h1 class="text-center" style="color:crimson">Edit Customer</h1>
 <a class="btn btn-primary mb-2 ml-4" href="/customer" role="button">Customer list</a>
 
-<!--<th:block th:if="${message}">-->
-<!--    <p th:text="${message}"></p>-->
-<!--</th:block>-->
 <form id="form" th:action="@{/edit-customer}" th:object="${customerDto}" method="post">
     <input type="hidden" th:field="*{customerId}"/>
     <div class="container">
@@ -31,6 +28,7 @@
         <div class="form-group">
             <label>Customer Birthday:</label>
             <input class="form-control" type="date" th:field="*{customerBirthday}">
+            <p class="text-danger" th:if="${#fields.hasErrors('customerBirthday')}" th:errors="*{customerBirthday}"></p>
         </div>
 
         <div class="form-group">
@@ -55,7 +53,12 @@
 
         <div class="form-group">
             <label>Customer Email:</label>
-            <input type="text" class="form-control" th:field="*{customerEmail}">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-label="Recipient's username"
+                       aria-describedby="basic-addon2" th:field="*{customerEmail}">
+                <span class="input-group-text" id="basic-addon2">@gmail.com</span>
+            </div>
+<!--            <input type="text" class="form-control" th:field="*{customerEmail}">-->
             <p class="text-danger" th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}"></p>
         </div>
 

@@ -21,45 +21,46 @@ values
 ("Phục vụ"),
 ("Quản lý");
 
--- insert into `role` (role_name)
--- values
--- ("admin"),
--- ("quản lý"),
--- ("nhân viên"),
--- ("giám đốc");
+insert into app_role (role_name)
+values
+("admin"),
+("quản lý"),
+("nhân viên"),
+("giám đốc");
 
--- insert into `user`
--- values
--- ("ngoc123","123456"),
--- ("nhatthanh1","123456"),
--- ("kimdung1202","123456"),
--- ("dieumy123","123456"),
--- ("anhkhoa1008","123456");
+insert into app_user (user_name, user_password)
+values
+("ngoc123","$2a$10$LGtG1VOa9hvKxTddxfCk9eyNBjw5wBlqfQLHknHzm8/GafUl3XXou"),
+("thanh123","$2a$10$LGtG1VOa9hvKxTddxfCk9eyNBjw5wBlqfQLHknHzm8/GafUl3XXou"),
+("dung123","$2a$10$LGtG1VOa9hvKxTddxfCk9eyNBjw5wBlqfQLHknHzm8/GafUl3XXou"),
+("my123","$2a$10$LGtG1VOa9hvKxTddxfCk9eyNBjw5wBlqfQLHknHzm8/GafUl3XXou"),
+("khoa123","$2a$10$LGtG1VOa9hvKxTddxfCk9eyNBjw5wBlqfQLHknHzm8/GafUl3XXou");
 
--- insert into user_role
--- values
--- (1,"anhkhoa1008"),
--- (1,"nhatthanh1"),
--- (3,"ngoc123"),
--- (3,"kimdung1202"),
--- (2,"dieumy123");
-
--- insert into employee
--- values
--- (1,"Nguyễn Ngọc","1994/08/10","190273846",7000000,"0398579397","ngoc@gmail.com","Đà Nẵng",1,2,2,"ngoc123"),
--- (2,"Huỳnh Nhật Thành","1995/10/06","198538579",8000000,"0368036796","nhatthanh@gmail.com","Huế",3,3,1,"nhatthanh1"),
--- (3,"Kim Dung","1992/12/20","194079780",9000000,"0987064679","kimdung@gmail.com","Quảng Trị",5,3,4,"kimdung1202"),
--- (4,"Trần Diệu My","1997/01/25","197490876",6000000,"0393908790","my@gmail.com","Kon Tum",2,1,3,"dieumy123"),
--- (5,"Đỗ Anh Khoa","1990/05/18","190985098",10000000,"0392076068","khoa@gmail.com","Hà Nội",4,4,2,"anhkhoa1008");
+insert into user_role
+values
+(1,"khoa123"),
+(1,"thanh123"),
+(3,"ngoc123"),
+(3,"dung123"),
+(2,"my123");
 
 insert into employee (employee_id,employee_name, employee_birthday, employee_id_card, employee_salary, 
 employee_phone, employee_email, employee_address, position_id, education_degree_id, division_id)
 values
-(1,"Nguyễn Ngọc","1994/08/10","190273846",7000000,"0398579397","ngoc@gmail.com","Đà Nẵng",1,2,2),
-(2,"Huỳnh Nhật Thành","1995/10/06","198538579",8000000,"0368036796","nhatthanh@gmail.com","Huế",3,3,1),
-(3,"Kim Dung","1992/12/20","194079780",9000000,"0987064679","kimdung@gmail.com","Quảng Trị",5,3,4),
-(4,"Trần Diệu My","1997/01/25","197490876",6000000,"0393908790","my@gmail.com","Kon Tum",2,1,3),
-(5,"Đỗ Anh Khoa","1990/05/18","190985098",10000000,"0392076068","khoa@gmail.com","Hà Nội",4,4,2);
+(1,"Nguyễn Ngọc","1994/08/10","190273846",7000000,"0398579397","ngoc@gmail.com","Đà Nẵng",1,2,2,"ngoc123"),
+(2,"Huỳnh Nhật Thành","1995/10/06","198538579",8000000,"0368036796","nhatthanh@gmail.com","Huế",3,3,1,"thanh123"),
+(3,"Kim Dung","1992/12/20","194079780",9000000,"0987064679","kimdung@gmail.com","Quảng Trị",5,3,4,"dung123"),
+(4,"Trần Diệu My","1997/01/25","197490876",6000000,"0393908790","my@gmail.com","Kon Tum",2,1,3,"my123"),
+(5,"Đỗ Anh Khoa","1990/05/18","190985098",10000000,"0392076068","khoa@gmail.com","Hà Nội",4,4,2,"khoa123");
+
+-- insert into employee (employee_id,employee_name, employee_birthday, employee_id_card, employee_salary, 
+-- employee_phone, employee_email, employee_address, position_id, education_degree_id, division_id)
+-- values
+-- (1,"Nguyễn Ngọc","1994/08/10","190273846",7000000,"0398579397","ngoc@gmail.com","Đà Nẵng",1,2,2),
+-- (2,"Huỳnh Nhật Thành","1995/10/06","198538579",8000000,"0368036796","nhatthanh@gmail.com","Huế",3,3,1),
+-- (3,"Kim Dung","1992/12/20","194079780",9000000,"0987064679","kimdung@gmail.com","Quảng Trị",5,3,4),
+-- (4,"Trần Diệu My","1997/01/25","197490876",6000000,"0393908790","my@gmail.com","Kon Tum",2,1,3),
+-- (5,"Đỗ Anh Khoa","1990/05/18","190985098",10000000,"0392076068","khoa@gmail.com","Hà Nội",4,4,2);
 
 insert into customer_type (customer_type_name)
 values

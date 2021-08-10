@@ -7,13 +7,13 @@
 </head>
 <body>
 <div th:replace="/frame/navbar :: div"></div>
-<h1 class="text-center" style="color:crimson">Customer user service List</h1>
-<th:block th:if="${message}">
-    <p style="color: red" th:text="${message}"></p>
-</th:block>
-<a class="btn btn-primary mb-2 ml-4" href="/create-customer" role="button">Create new customer</a>
+<h1 class="text-center" style="color:crimson">Customer user service list</h1>
+<div th:if="${message}" class="alert alert-warning" role="alert">
+    <strong style="color: red" th:text="${message}"></strong>
+</div>
 
-<form th:action="@{/customer-user-service/search}" method="get" class="form-inline my-2 my-lg-0 mr-4" style="float:right">
+<form th:action="@{/customer-user-service/search}" method="get" class="form-inline my-2 my-lg-0 mr-4"
+      style="float:right">
     <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
 </form>
@@ -30,7 +30,6 @@
         <th>Contract Detail Id</th>
         <th>Attach Service Name</th>
         <th>Total Money</th>
-        <th>Edit</th>
         <th>Delete</th>
     </tr>
     <th:block th:each="customer,status : ${customers}">
@@ -46,10 +45,8 @@
             <td th:text="${customer.attachServiceName}"></td>
             <td th:text="${customer.totalMoney}"></td>
             <td>
-                <a class="btn btn-warning" th:href="@{/edit-customer-user-service/__${customer.customerId}__ }" role="button">Edit</a>
-            </td>
-            <td>
-                <a th:data='${customer.customerId}' type="button" th:onclick="|deleteCustomerUserService(this.getAttribute('data'))|"
+                <a th:data='${customer.customerId}' type="button"
+                   th:onclick="|deleteCustomerUserService(this.getAttribute('data'))|"
                    class="btn btn-primary" data-toggle="modal" data-target="#modelId">
                     Delete
                 </a>
@@ -83,12 +80,6 @@
         </div>
     </div>
 </form>
-<!--<div>-->
-<!--    <a th:href="@{'/customer-user-service'(page=${customers.number - 1}, name =${nameValue})}" th:if="${customers.hasPrevious()}">Previous</a>-->
-<!--    <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>-->
-<!--    <a th:href="@{'/customer-user-service'(page=${customers.number + 1}, name =${nameValue})}"-->
-<!--       th:if="${customers.hasNext()}">Next</a>-->
-<!--</div>-->
 
 <nav class="float-right mr-4" aria-label="Page navigation example">
     <ul class="pagination">

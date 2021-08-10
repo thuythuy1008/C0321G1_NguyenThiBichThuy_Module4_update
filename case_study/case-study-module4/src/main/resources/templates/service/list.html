@@ -8,6 +8,9 @@
 <body>
 <div th:replace="/frame/navbar :: div"></div>
 <h1 class="text-center" style="color:crimson">Service List</h1>
+<div th:if="${message}" class="alert alert-warning" role="alert">
+    <strong style="color: red" th:text="${message}"></strong>
+</div>
 <a class="btn btn-primary mb-2 ml-4" href="/service" role="button">Service Home</a>
 
 <form th:action="@{/list/search}" method="get" class="form-inline my-2 my-lg-0 mr-4" style="float:right">
@@ -29,7 +32,7 @@
         <th>Number Of Floors</th>
         <th>Service Type</th>
         <th>Rent Type</th>
-        <th>Edit</th>
+<!--        <th>Edit</th>-->
         <th>Delete</th>
     </tr>
     <th:block th:each="service,status : ${services}">
@@ -46,10 +49,10 @@
             <td th:text="${service.numberOfFloors}"></td>
             <td th:text="${service.serviceType.serviceTypeName}"></td>
             <td th:text="${service.rentType.rentTypeName}"></td>
-            <td>
-                <a class="btn btn-warning" th:href="@{/edit-service-villa/__${service.serviceId}__ }"
-                   role="button">Edit</a>
-            </td>
+<!--            <td>-->
+<!--                <a class="btn btn-warning" th:href="@{/edit-service-villa/__${service.serviceId}__ }"-->
+<!--                   role="button">Edit</a>-->
+<!--            </td>-->
             <td>
                 <a type="button" th:onclick="|deleteService(${service.serviceId})|"
                    class="btn btn-primary" data-toggle="modal" data-target="#modelId">
@@ -85,23 +88,19 @@
         </div>
     </div>
 </form>
-<!--<div>-->
-<!--    <a th:href="@{'/list'(page=${services.number - 1}, name =${nameValue})}" th:if="${services.hasPrevious()}">Previous</a>-->
-<!--    <span th:text="${services.number + 1}"></span>/<span th:text="${services.totalPages}"></span>-->
-<!--    <a th:href="@{'/list'(page=${services.number + 1}, name =${nameValue})}"-->
-<!--       th:if="${services.hasNext()}">Next</a>-->
-<!--</div>-->
 
 <nav class="float-right mr-4" aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item">
-            <a class="page-link" aria-label="Previous" th:href="@{'/list'(page=${services.number - 1}, name =${nameValue})}" th:if="${services.hasPrevious()}">
+            <a class="page-link" aria-label="Previous"
+               th:href="@{'/list'(page=${services.number - 1}, name =${nameValue})}" th:if="${services.hasPrevious()}">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li class="page-item"><a class="page-link" th:text="${services.number + 1}"></a></li>
         <li class="page-item">
-            <a class="page-link" th:href="@{'/list'(page=${services.number + 1}, name =${nameValue})}" th:if="${services.hasNext()}" aria-label="Next">
+            <a class="page-link" th:href="@{'/list'(page=${services.number + 1}, name =${nameValue})}"
+               th:if="${services.hasNext()}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

@@ -27,13 +27,22 @@
 
         <div class="form-group">
             <label>Service Area:</label>
-            <input type="text" class="form-control" th:field="*{serviceArea}">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" th:field="*{serviceArea}">
+                <span class="input-group-text">.00</span>
+            </div>
+<!--            <input type="text" class="form-control" th:field="*{serviceArea}">-->
             <p class="text-danger" th:if="${#fields.hasErrors('serviceArea')}" th:errors="*{serviceArea}"></p>
         </div>
 
         <div class="form-group">
             <label>Service Cost:</label>
-            <input type="text" class="form-control" th:field="*{serviceCost}">
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" th:field="*{serviceCost}">
+                <span class="input-group-text">VND</span>
+            </div>
+<!--            <input type="text" class="form-control" th:field="*{serviceCost}">-->
             <p class="text-danger" th:if="${#fields.hasErrors('serviceCost')}" th:errors="*{serviceCost}"></p>
         </div>
 
@@ -52,12 +61,17 @@
         <div class="form-group">
             <label>Description Other Convenience:</label>
             <input type="text" class="form-control" th:field="*{descriptionOtherConvenience}">
-            <p class="text-danger" th:if="${#fields.hasErrors('descriptionOtherConvenience')}" th:errors="*{descriptionOtherConvenience}"></p>
+            <p class="text-danger" th:if="${#fields.hasErrors('descriptionOtherConvenience')}"
+               th:errors="*{descriptionOtherConvenience}"></p>
         </div>
 
         <div class="form-group">
             <label>Poll Area:</label>
-            <input type="text" class="form-control" th:field="*{poolArea}">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" th:field="*{poolArea}">
+                <span class="input-group-text">.00</span>
+            </div>
+<!--            <input type="text" class="form-control" th:field="*{poolArea}">-->
             <p class="text-danger" th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}"></p>
         </div>
 

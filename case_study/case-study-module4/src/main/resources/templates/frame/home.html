@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      >
 <head>
     <meta charset="UTF-8">
     <title>Khu Nghỉ Dưỡng Furama</title>
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -14,10 +16,12 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
+
         <div class="carousel-item active">
             <div class="position-absolute mt-4" style="left: 30%">
                 <h1 class="text-center text-danger ml-5">Welcome to Furama Resort!!!</h1>
             </div>
+
             <img src="/image/resort1.png" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
@@ -37,9 +41,10 @@
     </a>
 </div>
 
+
 <div th:replace="/frame/navbar :: div"></div>
 
-<div class="container-fluid">
+<div class="container-fluid mt-2">
     <div class="row">
         <div class="col-2">
             <ul class="list-group">

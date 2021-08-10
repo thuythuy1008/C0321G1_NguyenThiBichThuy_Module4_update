@@ -20,7 +20,7 @@ public interface CustomerUserServiceRepository extends JpaRepository<Customer, I
             "join contract_detail on contract.contract_id = contract_detail.contract_id " +
             "join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id " +
             "where customer.customer_name like %?1% " +
-            "group by customer.customer_id", nativeQuery = true,
+            "group by contract_detail.contract_detail_id", nativeQuery = true,
             countQuery = "select count(*) " +
                     "from customer " +
                     "join contract on customer.customer_id = contract.customer_id " +
@@ -28,7 +28,6 @@ public interface CustomerUserServiceRepository extends JpaRepository<Customer, I
                     "join contract_detail on contract.contract_id = contract_detail.contract_id " +
                     "join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id " +
                     "where customer.customer_name like %?1% " +
-                    "group by customer.customer_id")
+                    "group by contract_detail.contract_detail_id")
     Page<CustomerOtherDto> getCustomerUserService(Pageable pageable, String name);
-//    Page<Customer> findAllByCustomerNameContaining(Pageable pageable, String name);
 }

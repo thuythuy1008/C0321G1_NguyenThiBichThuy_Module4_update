@@ -45,7 +45,7 @@ public class ServiceController {
 
     @GetMapping(value = {"/list", "/list/search"})
     public ModelAndView listService(@PageableDefault(value = 3) Pageable pageable,
-                                  @RequestParam Optional<String> name) {
+                                    @RequestParam Optional<String> name) {
         String nameValue = "";
         if (name.isPresent()) {
             nameValue = name.get();
@@ -65,13 +65,14 @@ public class ServiceController {
 
     @PostMapping({"/create-service-villa"})
     public String checkValidationVilla(@Valid @ModelAttribute("serviceDto") ServiceDto serviceDto,
-                                  BindingResult bindingResult) {
+                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasFieldErrors()) {
             return "/service/create-villa";
         } else {
             Service service = new Service();
             BeanUtils.copyProperties(serviceDto, service);
             serviceService.save(service);
+            redirectAttributes.addFlashAttribute("message", "Villa created successfully");
             return "redirect:/list";
         }
     }
@@ -84,13 +85,14 @@ public class ServiceController {
 
     @PostMapping({"/create-service-house"})
     public String checkValidationHouse(@Valid @ModelAttribute("serviceDto") ServiceDto serviceDto,
-                                  BindingResult bindingResult) {
+                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasFieldErrors()) {
             return "/service/create-house";
         } else {
             Service service = new Service();
             BeanUtils.copyProperties(serviceDto, service);
             serviceService.save(service);
+            redirectAttributes.addFlashAttribute("message", "House created successfully");
             return "redirect:/list";
         }
     }
@@ -103,44 +105,24 @@ public class ServiceController {
 
     @PostMapping({"/create-service-room"})
     public String checkValidationRoom(@Valid @ModelAttribute("serviceDto") ServiceDto serviceDto,
-                                       BindingResult bindingResult) {
+                                      BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasFieldErrors()) {
             return "/service/create-room";
         } else {
             Service service = new Service();
             BeanUtils.copyProperties(serviceDto, service);
             serviceService.save(service);
+            redirectAttributes.addFlashAttribute("message", "Room created successfully");
             return "redirect:/list";
         }
     }
 
     @PostMapping("/delete-service")
-    public String showDeleteForm(@RequestParam Optional<Integer> id) {
+    public String showDeleteForm(@RequestParam Optional<Integer> id, RedirectAttributes redirectAttributes) {
         Service service = serviceService.findById(id.get());
         service.setFlag(1);
         serviceService.save(service);
+        redirectAttributes.addFlashAttribute("message", "Service deleted successfully");
         return "redirect:/list";
     }
-
-
-//    @GetMapping("/edit-service-villa/{id}")
-//    public String showEditForm(@PathVariable Integer id, Model model) {
-//        Service service = serviceService.findById(id);
-//        ServiceDto serviceDto = new ServiceDto();
-//        BeanUtils.copyProperties(service, serviceDto);
-//        model.addAttribute("serviceDto", serviceDto);
-//        return "/service/create-villa";
-//    }
-
-//    @PostMapping({"/edit-customer"})
-//    public String updateBlog(@Valid @ModelAttribute("customerDto") CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-//        if (bindingResult.hasFieldErrors()) {
-//            return "/customer/edit";
-//        } else {
-//            Customer customer = new Customer();
-//            BeanUtils.copyProperties(customerDto, customer);
-//            customerService.save(customer);
-//            redirectAttributes.addFlashAttribute("message", "Blog updated successfully");
-//            return "redirect:/customer";
-//        }
 }

@@ -32,7 +32,7 @@ public class CustomerController {
 
     @GetMapping(value = {"/customer", "/customer/search"})
     public ModelAndView listCustomer(@PageableDefault(value = 3) Pageable pageable,
-                                  @RequestParam Optional<String> name) {
+                                     @RequestParam Optional<String> name) {
         String nameValue = "";
         if (name.isPresent()) {
             nameValue = name.get();
@@ -45,13 +45,11 @@ public class CustomerController {
     }
 
     @PostMapping("/delete-customer")
-    public String showDeleteForm(@RequestParam Optional<Integer> id) {
+    public String showDeleteForm(@RequestParam Optional<Integer> id, RedirectAttributes redirectAttributes) {
         Customer customer = customerService.findById(id.get());
-//        if (customer == null) {
-//
-//        }
         customer.setFlag(1);
         customerService.save(customer);
+        redirectAttributes.addFlashAttribute("message", "Customer deleted successfully!!!");
         return "redirect:/customer";
     }
 
@@ -64,6 +62,7 @@ public class CustomerController {
     @PostMapping({"/create-customer"})
     public String checkValidation(@Valid @ModelAttribute("customerDto") CustomerDto customerDto,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new CustomerDto().validate(customerDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "/customer/create";
         } else {
@@ -86,7 +85,8 @@ public class CustomerController {
 
     @PostMapping({"/edit-customer"})
     public String updateCustomer(@Valid @ModelAttribute("customerDto") CustomerDto customerDto,
-                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                                 BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new CustomerDto().validate(customerDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "/customer/edit";
         } else {

@@ -20,5 +20,4 @@ public interface ContractDetailService {
     List<AttachService> findAllByAttachService();
 
     List<Contract> findAllByContract();
-
 }

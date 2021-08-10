@@ -9,6 +9,7 @@ import com.codegym.model.entity.employee.Employee;
 import com.codegym.model.entity.service.Service;
 import com.codegym.model.service.contract.ContractService;
 import com.codegym.model.service.employee.EmployeeService;
+import com.codegym.model.service.service.ServiceService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,9 +31,6 @@ public class ContractController {
     @Autowired
     private ContractService contractService;
 
-    @Autowired
-    private EmployeeService employeeService;
-
     @ModelAttribute("employeeList")
     public List<Employee> showEmployeeList() {
         return contractService.findAllByEmployee();
@@ -49,25 +47,19 @@ public class ContractController {
     }
 
     @GetMapping(value = {"/contract", "/contract/search"})
-    public ModelAndView listContract(@PageableDefault(value = 3) Pageable pageable,
-                                     @RequestParam Optional<String> name) {
-//        String nameValue = "";
-//        if (name.isPresent()) {
-//            nameValue = name.get();
-//        }
+    public ModelAndView listContract(@PageableDefault(value = 3) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("/contract/list");
         Page<Contract> contracts = contractService.findByContractId(pageable);
-//        Page<Employee> employees = employeeService.findByEmployeeName(pageable,nameValue);
-//        modelAndView.addObject("nameValue", nameValue);
         modelAndView.addObject("contracts", contracts);
         return modelAndView;
     }
 
     @PostMapping("/delete-contract")
-    public String showDeleteForm(@RequestParam Optional<Integer> id) {
+    public String showDeleteForm(@RequestParam Optional<Integer> id, RedirectAttributes redirectAttributes) {
         Contract contract = contractService.findById(id.get());
         contract.setFlag(1);
         contractService.save(contract);
+        redirectAttributes.addFlashAttribute("message", "Contract deleted successfully!!!");
         return "redirect:/contract";
     }
 
@@ -80,6 +72,7 @@ public class ContractController {
     @PostMapping({"/create-contract"})
     public String checkValidation(@Valid @ModelAttribute("contractDto") ContractDto contractDto,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new ContractDto().validate(contractDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "/contract/create";
         } else {
@@ -102,7 +95,8 @@ public class ContractController {
 
     @PostMapping({"/edit-contract"})
     public String updateContract(@Valid @ModelAttribute("contractDto") ContractDto contractDto,
-                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                                 BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new ContractDto().validate(contractDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "/contract/edit";
         } else {
