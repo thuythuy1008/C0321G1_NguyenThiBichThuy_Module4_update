@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Customer List</title>
     <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
 </head>
 <body>
@@ -31,7 +31,6 @@
         <th>Customer Email</th>
         <th>Customer Address</th>
         <th>Customer Type</th>
-        <!--        <th>Actions</th>-->
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -43,7 +42,6 @@
             <td th:text="${customer.customerBirthday}"></td>
             <td th:if="${customer.customerGender==0}" th:text="Male"></td>
             <td th:if="${customer.customerGender==1}" th:text="Female"></td>
-            <!--            <td th:text="${customer.customerGender}"></td>-->
             <td th:text="${customer.customerIdCard}"></td>
             <td th:text="${customer.customerPhone}"></td>
             <td th:text="${customer.customerEmail}"></td>

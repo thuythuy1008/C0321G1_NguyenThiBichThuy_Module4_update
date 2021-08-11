@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Customer user service list</title>
     <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
     <strong style="color: red" th:text="${message}"></strong>
 </div>
 
-<form th:action="@{/customer-user-service/search}" method="get" class="form-inline my-2 my-lg-0 mr-4"
+<form th:action="@{/customer-user-service/search}" method="get" class="form-inline my-2 my-lg-0 mr-4 mb-2"
       style="float:right">
     <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>

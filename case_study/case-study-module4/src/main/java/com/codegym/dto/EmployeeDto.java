@@ -10,6 +10,9 @@ import org.springframework.validation.Validator;
 
 import javax.validation.constraints.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Set;
 
@@ -75,8 +78,11 @@ public class EmployeeDto implements Validator {
             return;
         }
 
-        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(stringDate);
-        java.sql.Date dateNow = new java.sql.Date(System.currentTimeMillis());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(stringDate, formatter);
+        LocalDate dateNow = LocalDate.now();
+
+        int age = Period.between(date, dateNow).getYears();
 
         if (date.compareTo(dateNow) > 0) {
             errors.rejectValue("employeeBirthday", "employeeBirthday.futureDay");
@@ -84,6 +90,10 @@ public class EmployeeDto implements Validator {
 
         if (date.compareTo(dateNow) == 0) {
             errors.rejectValue("employeeBirthday", "employeeBirthday.nowDay");
+        }
+
+        if (age < 18) {
+            errors.rejectValue("employeeBirthday", "employeeBirthday.age");
         }
     }
 }

@@ -11,6 +11,8 @@ import org.springframework.validation.Validator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Set;
 
@@ -53,7 +55,8 @@ public class ContractDto implements Validator {
             return;
         }
 
-        Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(stringStartDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.parse(stringStartDate, formatter);
         String stringEndDate = contractDto.getContractEndDate();
 
         if (stringEndDate.equals("")) {
@@ -61,8 +64,9 @@ public class ContractDto implements Validator {
             return;
         }
 
-        Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(stringEndDate);
-        java.sql.Date dateNow = new java.sql.Date(System.currentTimeMillis());
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate endDate = LocalDate.parse(stringEndDate, formatter1);
+        LocalDate dateNow = LocalDate.now();
 
         if (startDate.compareTo(dateNow) < 0) {
             errors.rejectValue("contractStartDate", "contractStartDate.pastDay");

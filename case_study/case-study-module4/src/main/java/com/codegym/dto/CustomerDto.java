@@ -10,6 +10,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Set;
 
@@ -73,9 +76,11 @@ public class CustomerDto implements Validator {
             errors.rejectValue("customerBirthday", "customerBirthday.notBlank");
             return;
         }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(stringDate, formatter);
+        LocalDate dateNow = LocalDate.now();
 
-        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(stringDate);
-        java.sql.Date dateNow = new java.sql.Date(System.currentTimeMillis());
+        int age = Period.between(date, dateNow).getYears();
 
         if (date.compareTo(dateNow) > 0) {
             errors.rejectValue("customerBirthday", "customerBirthday.futureDay");
@@ -83,6 +88,10 @@ public class CustomerDto implements Validator {
 
         if (date.compareTo(dateNow) == 0) {
             errors.rejectValue("customerBirthday", "customerBirthday.nowDay");
+        }
+
+        if (age < 18) {
+            errors.rejectValue("customerBirthday", "customerBirthday.age");
         }
     }
 }
