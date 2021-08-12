@@ -12,7 +12,7 @@
     <strong style="color: red" th:text="${message}"></strong>
 </div>
 
-<form th:action="@{/customer-user-service/search}" method="get" class="form-inline my-2 my-lg-0 mr-4 mb-2"
+<form th:action="@{/customer-user-service/search}" method="get" class="form-inline mb-2 mr-4"
       style="float:right">
     <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
@@ -27,9 +27,10 @@
         <th>Customer Id Card</th>
         <th>Customer Address</th>
         <th>Contract Id</th>
-        <th>Contract Detail Id</th>
+<!--        <th>Contract Detail Id</th>-->
         <th>Attach Service Name</th>
-        <th>Total Money</th>
+        <th>Total Money Attach Service</th>
+<!--        <th>Total Money</th>-->
         <th>Delete</th>
     </tr>
     <th:block th:each="customer,status : ${customers}">
@@ -41,9 +42,16 @@
             <td th:text="${customer.customerIdCard}"></td>
             <td th:text="${customer.customerAddress}"></td>
             <td th:text="${customer.contractId}"></td>
-            <td th:text="${customer.contractDetailId}"></td>
-            <td th:text="${customer.attachServiceName}"></td>
-            <td th:text="${customer.totalMoney}"></td>
+<!--            <td th:text="${customer.contractDetailId}"></td>-->
+            <!--            <td th:text="${customer.attachServiceName}"></td>-->
+            <td>
+                <span th:each="item : ${contractDetailList}">
+                    <span th:if="(${customer.contractId}==${item.contract.contractId})"
+                          th:text="${item.attachService.attachServiceName} + '-' + ${item.quantity}">
+                    </span>
+                </span>
+            </td>
+            <td th:text="${customer.totalMoneyAttachService}"></td>
             <td>
                 <a th:data='${customer.customerId}' type="button"
                    th:onclick="|deleteCustomerUserService(this.getAttribute('data'))|"

@@ -22,6 +22,8 @@ public interface CustomerOtherDto {
 
     String getAttachServiceName();
 
+    String getTotalMoneyAttachService();
+
     String getTotalMoney();
 
 }

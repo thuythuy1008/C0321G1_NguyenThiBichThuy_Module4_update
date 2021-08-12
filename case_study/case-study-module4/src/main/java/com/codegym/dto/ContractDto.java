@@ -49,20 +49,16 @@ public class ContractDto implements Validator {
     public void validate(Object target, Errors errors) {
         ContractDto contractDto = (ContractDto) target;
         String stringStartDate = contractDto.getContractStartDate();
+        String stringEndDate = contractDto.getContractEndDate();
 
-        if (stringStartDate.equals("")) {
+        if (stringStartDate.equals("") || stringEndDate.equals("")) {
             errors.rejectValue("contractStartDate", "contractStartDate.notBlank");
+            errors.rejectValue("contractEndDate", "contractEndDate.notBlank");
             return;
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(stringStartDate, formatter);
-        String stringEndDate = contractDto.getContractEndDate();
-
-        if (stringEndDate.equals("")) {
-            errors.rejectValue("contractEndDate", "contractEndDate.notBlank");
-            return;
-        }
 
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate endDate = LocalDate.parse(stringEndDate, formatter1);

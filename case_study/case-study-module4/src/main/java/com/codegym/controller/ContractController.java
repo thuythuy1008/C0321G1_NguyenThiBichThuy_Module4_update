@@ -48,6 +48,7 @@ public class ContractController {
 
     @GetMapping(value = {"/contract", "/contract/search"})
     public ModelAndView listContract(@PageableDefault(value = 3) Pageable pageable) {
+        contractService.totalMoney();
         ModelAndView modelAndView = new ModelAndView("/contract/list");
         Page<Contract> contracts = contractService.findByContractId(pageable);
         modelAndView.addObject("contracts", contracts);

@@ -24,4 +24,6 @@ public interface ContractService {
     List<Customer> findAllByCustomer();
 
     List<Service> findAllByService();
+
+    void totalMoney();
 }

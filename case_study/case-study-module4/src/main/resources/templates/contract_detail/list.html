@@ -29,7 +29,12 @@
             <td th:text="${status.count}"></td>
             <td th:text="${contractDetail.contractDetailId}"></td>
             <td th:text="${contractDetail.contract.contractId}"></td>
-            <td th:text="${contractDetail.attachService.attachServiceName}"></td>
+<!--            <td th:text="${contractDetail.attachService.attachServiceName}"></td>-->
+            <td>
+                <span th:text="${contractDetail.attachService.attachServiceName}"></span>
+                <span>-</span>
+                <span th:text="${contractDetail.attachService.attachServiceCost}"></span>
+            </td>
             <td th:text="${contractDetail.quantity}"></td>
             <td>
                 <a class="btn btn-warning" th:href="@{/edit-contract-detail/__${contractDetail.contractDetailId}__ }"

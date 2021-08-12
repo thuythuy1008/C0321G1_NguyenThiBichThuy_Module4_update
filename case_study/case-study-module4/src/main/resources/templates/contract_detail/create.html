@@ -16,7 +16,7 @@
         <div class="form-group">
             <label>Contract Id:</label>
             <select class="form-control" th:field="*{contract.contractId}">
-                <option th:each="item:${contractList}" th:text="${item.contractId}"
+                <option th:each="item:${contractList}" th:text="${item.contractId} + '-' + ${item.customer.customerName}"
                         th:value="${item.contractId}"></option>
             </select>
         </div>
