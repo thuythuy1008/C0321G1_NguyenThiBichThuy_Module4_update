@@ -1,6 +1,8 @@
 package com.codegym.model.service.contract;
 
 import com.codegym.model.entity.contract.Contract;
+import com.codegym.model.entity.contract_detail.AttachService;
+import com.codegym.model.entity.contract_detail.ContractDetail;
 import com.codegym.model.entity.customer.Customer;
 import com.codegym.model.entity.customer.CustomerType;
 import com.codegym.model.entity.employee.Employee;
@@ -26,4 +28,8 @@ public interface ContractService {
     List<Service> findAllByService();
 
     void totalMoney();
+
+    List<ContractDetail> findAllContractDetail();
+
+    List<AttachService> findAllAttachService();
 }

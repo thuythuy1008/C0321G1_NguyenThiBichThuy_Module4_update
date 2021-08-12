@@ -1,13 +1,17 @@
 package com.codegym.controller;
 
+import com.codegym.dto.ContractDetailDto;
 import com.codegym.dto.ContractDto;
 import com.codegym.dto.CustomerDto;
 import com.codegym.model.entity.contract.Contract;
+import com.codegym.model.entity.contract_detail.AttachService;
+import com.codegym.model.entity.contract_detail.ContractDetail;
 import com.codegym.model.entity.customer.Customer;
 import com.codegym.model.entity.customer.CustomerType;
 import com.codegym.model.entity.employee.Employee;
 import com.codegym.model.entity.service.Service;
 import com.codegym.model.service.contract.ContractService;
+import com.codegym.model.service.contract_detail.ContractDetailService;
 import com.codegym.model.service.employee.EmployeeService;
 import com.codegym.model.service.service.ServiceService;
 import org.springframework.beans.BeanUtils;
@@ -31,6 +35,9 @@ public class ContractController {
     @Autowired
     private ContractService contractService;
 
+    @Autowired
+    private ContractDetailService contractDetailService;
+
     @ModelAttribute("employeeList")
     public List<Employee> showEmployeeList() {
         return contractService.findAllByEmployee();
@@ -46,6 +53,16 @@ public class ContractController {
         return contractService.findAllByService();
     }
 
+    @ModelAttribute("contractDetailList")
+    public List<ContractDetail> showSContractDetailList() {
+        return contractService.findAllContractDetail();
+    }
+
+    @ModelAttribute("attachServiceList")
+    public List<AttachService> showAttachServiceList() {
+        return contractDetailService.findAllByAttachService();
+    }
+
     @GetMapping(value = {"/contract", "/contract/search"})
     public ModelAndView listContract(@PageableDefault(value = 3) Pageable pageable) {
         contractService.totalMoney();
@@ -53,6 +70,30 @@ public class ContractController {
         Page<Contract> contracts = contractService.findByContractId(pageable);
         modelAndView.addObject("contracts", contracts);
         return modelAndView;
+    }
+
+    @GetMapping("/add-attach-service/{id}")
+    public String showForm(@PathVariable Integer id,Model model){
+        Contract contract = contractService.findById(id);
+        ContractDetailDto contractDetailDto = new ContractDetailDto();
+        contractDetailDto.setContract(contract);
+        BeanUtils.copyProperties(contract, contractDetailDto);
+        model.addAttribute("contractDetailDto", contractDetailDto);
+        return "/contract/add";
+    }
+
+    @PostMapping({"/add-attach-service"})
+    public String addAttachService(@Valid @ModelAttribute("contractDetailDto") ContractDetailDto contractDetailDto,
+                                 BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasFieldErrors()) {
+            return "/contract/add";
+        } else {
+            ContractDetail contractDetail = new ContractDetail();
+            BeanUtils.copyProperties(contractDetailDto, contractDetail);
+            contractDetailService.save(contractDetail);
+            redirectAttributes.addFlashAttribute("message", "Add Attach Service successfully!!!");
+            return "redirect:/contract";
+        }
     }
 
     @PostMapping("/delete-contract")

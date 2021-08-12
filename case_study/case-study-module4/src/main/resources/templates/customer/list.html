@@ -15,7 +15,7 @@
 <a class="btn btn-primary mb-2 ml-4" href="/create-customer" role="button">Create new customer</a>
 
 <form th:action="@{/customer/search}" method="get" class="form-inline my-2 my-lg-0 mr-4" style="float:right">
-    <input class="form-control mr-sm-2" type="text" name="name" placeholder="Search" aria-label="Search">
+    <input class="form-control mr-sm-2" type="text" name="keyWord" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
 </form>
 
@@ -91,14 +91,14 @@
     <ul class="pagination">
         <li class="page-item">
             <a class="page-link" aria-label="Previous"
-               th:href="@{'/customer'(page=${customers.number - 1}, name =${nameValue})}"
+               th:href="@{'/customer'(page=${customers.number - 1}, keyWord =${nameValue})}"
                th:if="${customers.hasPrevious()}">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li class="page-item"><a class="page-link" th:text="${customers.number + 1}"></a></li>
         <li class="page-item">
-            <a class="page-link" th:href="@{'/customer'(page=${customers.number + 1}, name =${nameValue})}"
+            <a class="page-link" th:href="@{'/customer'(page=${customers.number + 1}, keyWord =${nameValue})}"
                th:if="${customers.hasNext()}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>

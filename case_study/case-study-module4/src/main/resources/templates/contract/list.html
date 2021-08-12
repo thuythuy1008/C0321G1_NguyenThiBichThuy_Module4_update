@@ -24,6 +24,8 @@
         <th>Employee</th>
         <th>Customer</th>
         <th>Service</th>
+        <th>Attach Service</th>
+        <th>Add Attach Service</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -39,7 +41,18 @@
             <td th:text="${contract.customer.customerName}"></td>
             <td th:text="${contract.service.serviceName}"></td>
             <td>
-                <a class="btn btn-warning" th:href="@{/edit-contract/__${contract.contractId}__ }"
+                <span th:each="item : ${contractDetailList}">
+                    <span th:if="(${contract.contractId}==${item.contract.contractId})"
+                          th:text="${item.attachService.attachServiceName} + '-' + ${item.quantity}">
+                    </span>
+                </span>
+            </td>
+            <td>
+                <a class="btn btn-success" th:href="@{/add-attach-service/__${contract.contractId}__}"
+                   role="button">Add</a>
+            </td>
+            <td>
+                <a class="btn btn-warning" th:href="@{/edit-contract/__${contract.contractId}__}"
                    role="button">Edit</a>
             </td>
             <td>

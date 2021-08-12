@@ -1,11 +1,13 @@
 package com.codegym.model.service.contract;
 
 import com.codegym.model.entity.contract.Contract;
+import com.codegym.model.entity.contract_detail.AttachService;
 import com.codegym.model.entity.contract_detail.ContractDetail;
 import com.codegym.model.entity.customer.Customer;
 import com.codegym.model.entity.employee.Employee;
 import com.codegym.model.entity.service.Service;
 import com.codegym.model.repository.contract.ContractRepository;
+import com.codegym.model.repository.contract_detail.AttachServiceRepository;
 import com.codegym.model.repository.contract_detail.ContractDetailRepository;
 import com.codegym.model.repository.customer.CustomerRepository;
 import com.codegym.model.repository.customer.CustomerTypeRepository;
@@ -33,6 +35,9 @@ public class ContractServiceImpl implements ContractService {
 
     @Autowired
     private ContractDetailRepository contractDetailRepository;
+
+    @Autowired
+    private AttachServiceRepository attachServiceRepository;
 
     @Override
     public void save(Contract contract) {
@@ -84,5 +89,15 @@ public class ContractServiceImpl implements ContractService {
             contract.setContractTotalMoney(totalMoney);
             contractRepository.save(contract);
         }
+    }
+
+    @Override
+    public List<ContractDetail> findAllContractDetail() {
+        return contractDetailRepository.findAll();
+    }
+
+    @Override
+    public List<AttachService> findAllAttachService() {
+        return attachServiceRepository.findAll();
     }
 }

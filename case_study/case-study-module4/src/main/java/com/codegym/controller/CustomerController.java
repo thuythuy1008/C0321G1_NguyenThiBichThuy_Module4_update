@@ -32,10 +32,10 @@ public class CustomerController {
 
     @GetMapping(value = {"/customer", "/customer/search"})
     public ModelAndView listCustomer(@PageableDefault(value = 3) Pageable pageable,
-                                     @RequestParam Optional<String> name) {
+                                     @RequestParam Optional<String> keyWord) {
         String nameValue = "";
-        if (name.isPresent()) {
-            nameValue = name.get();
+        if (keyWord.isPresent()) {
+            nameValue = keyWord.get();
         }
         ModelAndView modelAndView = new ModelAndView("/customer/list");
         Page<Customer> customers = customerService.findByCustomerName(pageable, nameValue);
